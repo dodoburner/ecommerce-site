@@ -2,6 +2,49 @@
   margin: 0;
   font-family: 'Raleway', sans-serif;
   box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  color: #1D1F22;
 }
 
+button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
 
+header {
+  height: 80px;
+  padding: 0 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header ul {
+  display: flex;
+  gap: 32px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+header ul li {
+  cursor: pointer;
+}
+
+.currency-cart-container {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.currency-changer {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
