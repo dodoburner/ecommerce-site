@@ -9,8 +9,8 @@ class Category extends Component {
       <div className="category-container">
         {category && (
           <>
-            <h1>{category.name}</h1>
-            <div>
+            <h1 className="category-name">{category.name}</h1>
+            <div className="products-grid">
               {category.products.map((product) => (
                 <Product product={product} />
               ))}

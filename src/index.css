@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  padding: 0;
   font-family: 'Raleway', sans-serif;
   box-sizing: border-box;
   text-decoration: none;
@@ -47,4 +48,69 @@ header ul li {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.category-container {
+  padding: 80px 100px;
+}
+
+.category-name {
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 160%;
+  text-transform: uppercase;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 40px;
+  row-gap: 100px;
+}
+
+.product {
+  padding: 16px;
+  position: relative;
+}
+
+.product:hover {
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.product-img {
+  height: 330px;
+  width: 354px;
+  margin-bottom: 24px;
+}
+
+.product-info {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 160%;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 160%;
+}
+
+.product-cart {
+  position: absolute;
+  bottom: 72px;
+  right: 21px;
+  width: 52px;
+  height: 52px;
+  background: #5ECE7B;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-cart:hover {
+  background-color: darkgreen;
+
 }
