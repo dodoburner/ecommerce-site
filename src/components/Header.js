@@ -6,7 +6,7 @@ class Header extends Component {
       <header>
         <ul>
           {this.props.categories.map((category) => (
-            <li>{category.name}</li>
+            <li key={category.name}>{category.name}</li>
           ))}
         </ul>
       </header>

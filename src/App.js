@@ -4,11 +4,36 @@ import Header from "./components/Header";
 import { gql } from "@apollo/client";
 
 const getData = gql`
-  {
-    categories {
+{
+  categories {
+  name
+  products {
+      id
       name
-    }
+      inStock
+      gallery
+      description
+      category
+      attributes {
+        id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
+      prices {
+        currency {
+          label
+          symbol
+        }
+        amount
+      }
+      brand
   }
+}}
 `
 class App extends Component {
   constructor() {
