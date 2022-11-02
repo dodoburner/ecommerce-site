@@ -3,8 +3,8 @@ import logo from "../assets/a-logo.png";
 import iconDown from "../assets/icon-down.png";
 import emptyCart from "../assets/empty-cart.png";
 class Header extends Component {
-  render() {
-    return (
+	render() {
+		return (
       <header>
         <ul>
           {this.props.categories.map((category) => (
@@ -21,7 +21,7 @@ class Header extends Component {
 					</button>
 
 					<button>
-						<img src={emptyCart} />
+						<img src={emptyCart} alt="empty cart" />
 					</button>
         </div>
       </header>
