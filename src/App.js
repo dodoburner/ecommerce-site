@@ -40,23 +40,31 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      categories: []
+      categories: [],
+      currentCategory: ""
     }
+    this.updateCurrentCategory = this.updateCurrentCategory.bind(this);
   }
 
   componentDidMount() {
     const fetchData = async () => {
       const response = await client.query({ query: getData })
-      this.setState({ categories: response.data.categories })
+      const categories = response.data.categories
+      this.setState({ categories: categories, currentCategory: categories[0] })
     }
     fetchData()
   }
 
+  updateCurrentCategory(value) {
+    this.setState({ currentCategory: value })
+  }
+
   render() {
+    const { categories, currentCategory } = this.state
     return (
       <div className="App">
-        <Header categories={this.state.categories} />
-        <Category category={this.state.categories[0]} />
+        <Header categories={categories} currentCategory={currentCategory} updateCurrentCategory={this.updateCurrentCategory} />
+        <Category category={currentCategory} />
       </div>
     )
   }

@@ -26,13 +26,19 @@ header ul {
   display: flex;
   gap: 32px;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 16px;
   line-height: 120%;
 }
 
 header ul li {
   cursor: pointer;
+}
+
+.header-active {
+  font-weight: 600;
+  color: #5ECE7B;
+  border-bottom: 2px solid #5ECE7B;
 }
 
 .currency-cart-container {
@@ -112,5 +118,4 @@ header ul li {
 
 .product-cart:hover {
   background-color: darkgreen;
-
 }

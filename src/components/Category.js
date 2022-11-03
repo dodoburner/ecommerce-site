@@ -12,7 +12,7 @@ class Category extends Component {
             <h1 className="category-name">{category.name}</h1>
             <div className="products-grid">
               {category.products.map((product) => (
-                <Product product={product} />
+                <Product key={product.name} product={product} />
               ))}
             </div>
           </>
