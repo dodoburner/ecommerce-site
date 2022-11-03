@@ -3,7 +3,7 @@ import Product from "./Product";
 
 class Category extends Component {
   render() {
-    const { category } = this.props
+    const { currentCategory: category, currentCurrency } = this.props.state
 
     return (
       <div className="category-container">
@@ -12,7 +12,7 @@ class Category extends Component {
             <h1 className="category-name">{category.name}</h1>
             <div className="products-grid">
               {category.products.map((product) => (
-                <Product key={product.name} product={product} />
+                <Product key={product.name} product={product} currentCurrency={currentCurrency} />
               ))}
             </div>
           </>

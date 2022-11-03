@@ -67,7 +67,6 @@ class App extends Component {
   }
 
   render() {
-    const { currentCategory } = this.state;
     return (
       <div className="App">
         <Header
@@ -75,7 +74,7 @@ class App extends Component {
           updateCurrentCategory={this.updateCurrentCategory}
           updateCurrentCurrency={this.updateCurrentCurrency}
         />
-        <Category category={currentCategory} />
+        <Category state={this.state} />
       </div>
     );
   }

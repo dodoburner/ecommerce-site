@@ -18,8 +18,9 @@ class Product extends Component {
   };
 
   render() {
-    const { product } = this.props;
+    const { product, currentCurrency } = this.props;
     const { isHovering } = this.state;
+    const price = product.prices.find((el) => el.currency.symbol === currentCurrency);
 
     return (
       <div
@@ -30,8 +31,8 @@ class Product extends Component {
         <img className="product-img" src={product.gallery[0]} alt="product" />
         <p className="product-name">{product.name}</p>
         <p className="product-price">
-          {product.prices[0].currency.symbol}
-          {product.prices[0].amount}
+          {price.currency.symbol}
+          {price.amount}
         </p>
         {isHovering && (
           <div className="product-cart">
