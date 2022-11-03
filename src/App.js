@@ -41,7 +41,8 @@ class App extends Component {
     super();
     this.state = {
       categories: [],
-      currentCategory: ""
+      currentCategory: "",
+      currentCurrency: ""
     }
     this.updateCurrentCategory = this.updateCurrentCategory.bind(this);
   }

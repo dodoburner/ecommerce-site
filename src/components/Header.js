@@ -17,7 +17,7 @@ class Header extends Component {
 
     return (
       <header>
-        <ul>
+        <ul className="category-list">
           {categories.map((category) => {
             return (
               <li
@@ -39,6 +39,14 @@ class Header extends Component {
           <button className="currency-changer">
             $
             <img src={iconDown} alt="icon-down" />
+
+            <ul className="currency-dropdown">
+              <li>$ USD</li>
+              <li>A$ AUD</li>
+              <li>€ EUR</li>
+              <li>¥ JPY</li>
+              <li>₽ RUB</li>
+            </ul>
           </button>
 
           <button>

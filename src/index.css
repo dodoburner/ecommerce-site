@@ -22,7 +22,7 @@ header {
   align-items: center;
 }
 
-header ul {
+.category-list {
   display: flex;
   gap: 32px;
   text-transform: uppercase;
@@ -54,6 +54,27 @@ header ul li {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
+}
+
+.currency-dropdown {
+  position: absolute;
+  top: 100%;
+  left: -40px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.currency-dropdown li {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  padding: 10px 40px 10px 20px;
+  white-space: nowrap;
+}
+
+.currency-dropdown li:hover {
+  background: #EEEEEE;
 }
 
 .category-container {
