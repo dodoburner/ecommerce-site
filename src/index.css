@@ -63,6 +63,7 @@ header ul li {
   left: -40px;
   background: #FFFFFF;
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  z-index: 100;
 }
 
 .currency-dropdown li {

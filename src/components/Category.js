@@ -7,7 +7,7 @@ class Category extends Component {
 
     return (
       <div className="category-container">
-        {category && (
+        {"products" in category && (
           <>
             <h1 className="category-name">{category.name}</h1>
             <div className="products-grid">

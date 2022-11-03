@@ -5,11 +5,27 @@ import emptyCart from "../assets/empty-cart.png";
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
+    this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
   }
 
-  handleClick(value) {
-    this.props.updateCurrentCategory(value)
+  handleCategoryClick(value) {
+    this.props.updateCurrentCategory(value);
+  }
+
+  handleCurrencyClick(value) {
+    this.props.updateCurrentCurrency(value);
+  }
+
+  renderCurrencies() {
+    return this.props.currentCategory.products[0].prices.map((price) => {
+      const { symbol, label } = price.currency;
+      return (
+        <li onClick={() => this.handleCurrencyClick(label)}>
+          {symbol} {label}
+        </li>
+      );
+    });
   }
 
   render() {
@@ -25,7 +41,7 @@ class Header extends Component {
                   currentCategory.name === category.name ? "header-active" : ""
                 }
                 key={category.name}
-                onClick={() => this.handleClick(category)}
+                onClick={() => this.handleCategoryClick(category)}
               >
                 {category.name}
               </li>
@@ -39,13 +55,8 @@ class Header extends Component {
           <button className="currency-changer">
             $
             <img src={iconDown} alt="icon-down" />
-
             <ul className="currency-dropdown">
-              <li>$ USD</li>
-              <li>A$ AUD</li>
-              <li>€ EUR</li>
-              <li>¥ JPY</li>
-              <li>₽ RUB</li>
+              {"products" in currentCategory && this.renderCurrencies()}
             </ul>
           </button>
 
