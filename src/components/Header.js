@@ -47,8 +47,7 @@ class Header extends Component {
   }
 
   render() {
-    const { categories, currentCategory, currentCurrency, cart } =
-      this.props.state;
+    const { categories, currentCategory, currentCurrency, cartCount } = this.props.state;
     const { incrementProductCount, decrementProductCount } = this.props;
     const { currencyDropdownOpen } = this.state;
 
@@ -89,12 +88,10 @@ class Header extends Component {
             </ul>
           </div>
 
-          <img
-            className="cart-img"
-            src={emptyCart}
-            alt="empty cart"
-            onClick={this.handleOpenCart}
-          />
+          <div className="cart-img-container" onClick={this.handleOpenCart}>
+            <img className="cart-img" src={emptyCart} alt="cart" />
+            {cartCount > 0 ? <div className="cart-count">{cartCount}</div> : null}
+          </div>
 
           {this.state.cartOpen && (
             <div

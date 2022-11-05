@@ -3,7 +3,6 @@ import { client } from ".";
 import { gql } from "@apollo/client";
 import Header from "./components/Header";
 import Category from "./components/Category";
-import { argsToArgsConfig } from "graphql/type/definition";
 
 const getData = gql`
   {
@@ -46,6 +45,7 @@ class App extends Component {
       currentCategory: {},
       currentCurrency: "$",
       cart: [],
+      cartCount: 0,
     };
     this.updateCurrentCategory = this.updateCurrentCategory.bind(this);
     this.updateCurrentCurrency = this.updateCurrentCurrency.bind(this);
@@ -74,31 +74,32 @@ class App extends Component {
 
   addToCart(product) {
     const attributes = product.attributes.map((attribute) => {
-      return {...attribute, selected: attribute.items[0]}
-    })
-    product = {...product, attributes, count: 1}
+      return { ...attribute, selected: attribute.items[0] };
+    });
+    product = { ...product, attributes, count: 1 };
     this.setState((prevState) => ({
       cart: [...prevState.cart, product],
+      cartCount: (prevState.cartCount += 1),
     }));
   }
 
   incrementProductCount(index) {
     this.setState((prevState) => {
       const product = prevState.cart.find((product, i) => i === index);
-      product.count += 1
-      return { cart: prevState.cart }
-    })
+      product.count += 1;
+      return { cart: prevState.cart, cartCount: (prevState.cartCount += 1) };
+    });
   }
 
   decrementProductCount(index) {
     this.setState((prevState) => {
       const product = prevState.cart.find((product, i) => i === index);
       if (product.count === 1) {
-        prevState.cart.splice(index, 1)
+        prevState.cart.splice(index, 1);
       }
-      product.count -= 1
-      return { cart: prevState.cart }
-    })
+      product.count -= 1;
+      return { cart: prevState.cart, cartCount: (prevState.cartCount -= 1) };
+    });
   }
 
   // updateSelectedAttribute(product, attribute, item) {

@@ -22,7 +22,7 @@ class Product extends Component {
   }
 
   render() {
-    const { product, currentCurrency, addToCart } = this.props;
+    const { product, currentCurrency } = this.props;
     const { isHovering } = this.state;
     const price = product.prices.find((el) => el.currency.symbol === currentCurrency);
 
