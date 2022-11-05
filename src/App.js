@@ -3,6 +3,7 @@ import { client } from ".";
 import { gql } from "@apollo/client";
 import Header from "./components/Header";
 import Category from "./components/Category";
+import { argsToArgsConfig } from "graphql/type/definition";
 
 const getData = gql`
   {
@@ -48,6 +49,7 @@ class App extends Component {
     };
     this.updateCurrentCategory = this.updateCurrentCategory.bind(this);
     this.updateCurrentCurrency = this.updateCurrentCurrency.bind(this);
+    // this.updateSelectedAttribute = this.updateSelectedAttribute.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
 
@@ -69,10 +71,23 @@ class App extends Component {
   }
 
   addToCart(product) {
+    const attributes = product.attributes.map((attribute) => {
+      return {...attribute, selected: attribute.items[0]}
+    })
+    product = {...product, attributes}
     this.setState((prevState) => ({
       cart: [...prevState.cart, product],
     }));
   }
+
+  // updateSelectedAttribute(product, attribute, item) {
+  //   this.setState((prevState) => {
+  //     const prod = prevState.cart.find((el) => el.id === product.id);
+  //     const attr = prod.attributes.find((attr) => attr.name === attribute.name)
+  //     attr.selected = item
+  //     return { cart: prevState.cart }
+  //   })
+  // }
 
   render() {
     return (

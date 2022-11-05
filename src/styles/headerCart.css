@@ -1,9 +1,9 @@
 .cart-container {
   position: absolute;
-  bottom: 0;
   top: 80px;
   left: 0;
   right: 0;
+  bottom: 0;
   background: rgba(57, 55, 72, 0.22);
   z-index: 100;
   display: flex;
@@ -69,14 +69,12 @@
   padding: 2px;
 }
 
-.item-text:hover,
-.cart-item-amount button:hover {
+.item-text-selected {
   background: #1d1f22;
   color: white;
-  cursor: pointer;
 }
 
-.item-text:hover p {
+.item-text-selected p {
   color: white;
 }
 
@@ -93,9 +91,8 @@
   width: 16px;
 }
 
-.item-swatch:hover {
+.item-swatch-selected {
   border: 1px solid #5ece7b;
-  cursor: pointer;
 }
 
 .cart-item {

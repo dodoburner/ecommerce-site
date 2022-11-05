@@ -8,6 +8,10 @@
   color: #1D1F22;
 }
 
+body {
+  position: relative;
+}
+
 button {
   border: none;
   background-color: white;

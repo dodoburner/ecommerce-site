@@ -91,8 +91,11 @@ class Header extends Component {
           <img className="cart-img" src={emptyCart} alt="empty cart" onClick={this.handleOpenCart}/>
 
           {this.state.cartOpen && (
-            <div className="cart-container">
-              <HeaderCart state={this.props.state} />
+            <div className="cart-container" onClick={(e) => {
+              if (e.target !== e.currentTarget) return
+              this.handleOpenCart()
+            }}>
+              <HeaderCart state={this.props.state}/>
             </div>
           )}
         </div>

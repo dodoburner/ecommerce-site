@@ -5,20 +5,43 @@ class HeaderCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      total: this.countTotal()
-    }
+      total: this.countTotal(),
+    };
+    this.getAttributeItems = this.getAttributeItems.bind(this);
   }
 
   countTotal() {
     let total = 0;
     const { cart, currentCurrency } = this.props.state;
-    cart.forEach(product => {
+    cart.forEach((product) => {
       const price = product.prices.find(
         (el) => el.currency.symbol === currentCurrency
       );
-      total += price.amount
+      total += price.amount;
     });
-    return total.toFixed(2)
+    return total.toFixed(2);
+  }
+
+  getAttributeItems(attribute) {
+    const selectedValue = attribute.selected.displayValue;
+    let items = attribute.items.map((item) => {
+      const isSelected = selectedValue === item.displayValue;
+      return attribute.type === "text" ? (
+        <div
+          className={`item-text ${isSelected ? "item-text-selected" : ""}`}
+        >
+          <p>{item.displayValue}</p>
+        </div>
+      ) : (
+        <div
+          className={`item-swatch ${isSelected ? "item-swatch-selected" : ""}`}
+        >
+          <div style={{ background: item.value }}></div>
+        </div>
+      );
+    });
+
+    return items;
   }
 
   render() {
@@ -29,6 +52,7 @@ class HeaderCart extends Component {
         <p className="cart-title">
           My Bag, <span>{cart.length} items</span>
         </p>
+
         {cart.map((product) => {
           const price = product.prices.find(
             (el) => el.currency.symbol === currentCurrency
@@ -45,17 +69,7 @@ class HeaderCart extends Component {
 
                 <div className="cart-item-attributes-container">
                   {product.attributes.map((attribute) => {
-                    let items = attribute.items.map((item) => {
-                      return attribute.type === "text" ? (
-                        <div className="item-text">
-                          <p>{item.displayValue}</p>
-                        </div>
-                      ) : (
-                        <div className="item-swatch">
-                          <div style={{ background: item.value }}></div>
-                        </div>
-                      );
-                    });
+                    const items = this.getAttributeItems(attribute);
 
                     return (
                       <div className="cart-item-attribute">
@@ -80,7 +94,13 @@ class HeaderCart extends Component {
           );
         })}
 
-        <p className="cart-total">Total <span>{currentCurrency}{this.state.total}</span></p>
+        <p className="cart-total">
+          Total{" "}
+          <span>
+            {currentCurrency}
+            {this.state.total}
+          </span>
+        </p>
 
         <div className="cart-buttons">
           <button className="view-bag-btn">VIEW BAG</button>
