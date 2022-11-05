@@ -49,6 +49,7 @@ class Header extends Component {
   render() {
     const { categories, currentCategory, currentCurrency, cart } =
       this.props.state;
+    const { incrementProductCount, decrementProductCount } = this.props;
     const { currencyDropdownOpen } = this.state;
 
     return (
@@ -88,14 +89,26 @@ class Header extends Component {
             </ul>
           </div>
 
-          <img className="cart-img" src={emptyCart} alt="empty cart" onClick={this.handleOpenCart}/>
+          <img
+            className="cart-img"
+            src={emptyCart}
+            alt="empty cart"
+            onClick={this.handleOpenCart}
+          />
 
           {this.state.cartOpen && (
-            <div className="cart-container" onClick={(e) => {
-              if (e.target !== e.currentTarget) return
-              this.handleOpenCart()
-            }}>
-              <HeaderCart state={this.props.state}/>
+            <div
+              className="cart-container"
+              onClick={(e) => {
+                if (e.target !== e.currentTarget) return;
+                this.handleOpenCart();
+              }}
+            >
+              <HeaderCart
+                state={this.props.state}
+                incrementProductCount={incrementProductCount}
+                decrementProductCount={decrementProductCount}
+              />
             </div>
           )}
         </div>

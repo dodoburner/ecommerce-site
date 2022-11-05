@@ -49,6 +49,8 @@ class App extends Component {
     };
     this.updateCurrentCategory = this.updateCurrentCategory.bind(this);
     this.updateCurrentCurrency = this.updateCurrentCurrency.bind(this);
+    this.incrementProductCount = this.incrementProductCount.bind(this);
+    this.decrementProductCount = this.decrementProductCount.bind(this);
     // this.updateSelectedAttribute = this.updateSelectedAttribute.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
@@ -74,10 +76,29 @@ class App extends Component {
     const attributes = product.attributes.map((attribute) => {
       return {...attribute, selected: attribute.items[0]}
     })
-    product = {...product, attributes}
+    product = {...product, attributes, count: 1}
     this.setState((prevState) => ({
       cart: [...prevState.cart, product],
     }));
+  }
+
+  incrementProductCount(index) {
+    this.setState((prevState) => {
+      const product = prevState.cart.find((product, i) => i === index);
+      product.count += 1
+      return { cart: prevState.cart }
+    })
+  }
+
+  decrementProductCount(index) {
+    this.setState((prevState) => {
+      const product = prevState.cart.find((product, i) => i === index);
+      if (product.count === 1) {
+        prevState.cart.splice(index, 1)
+      }
+      product.count -= 1
+      return { cart: prevState.cart }
+    })
   }
 
   // updateSelectedAttribute(product, attribute, item) {
@@ -96,6 +117,8 @@ class App extends Component {
           state={this.state}
           updateCurrentCategory={this.updateCurrentCategory}
           updateCurrentCurrency={this.updateCurrentCurrency}
+          incrementProductCount={this.incrementProductCount}
+          decrementProductCount={this.decrementProductCount}
         />
         <Category state={this.state} addToCart={this.addToCart} />
       </div>

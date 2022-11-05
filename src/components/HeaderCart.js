@@ -10,6 +10,14 @@ class HeaderCart extends Component {
     this.getAttributeItems = this.getAttributeItems.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    const prevCart = prevProps.state
+    const cart = this.props.state
+    if (prevCart !== cart) {
+      this.setState({ total: this.countTotal() })
+    }
+  }
+
   countTotal() {
     let total = 0;
     const { cart, currentCurrency } = this.props.state;
@@ -17,7 +25,7 @@ class HeaderCart extends Component {
       const price = product.prices.find(
         (el) => el.currency.symbol === currentCurrency
       );
-      total += price.amount;
+      total += price.amount * product.count;
     });
     return total.toFixed(2);
   }
@@ -46,6 +54,7 @@ class HeaderCart extends Component {
 
   render() {
     const { cart, currentCurrency } = this.props.state;
+    const { incrementProductCount, decrementProductCount } = this.props;
 
     return (
       <div className="cart">
@@ -53,7 +62,7 @@ class HeaderCart extends Component {
           My Bag, <span>{cart.length} items</span>
         </p>
 
-        {cart.map((product) => {
+        {cart.map((product, index) => {
           const price = product.prices.find(
             (el) => el.currency.symbol === currentCurrency
           );
@@ -84,9 +93,9 @@ class HeaderCart extends Component {
               </div>
 
               <div className="cart-item-amount">
-                <button>+</button>
-                <p>0</p>
-                <button>-</button>
+                <button onClick={() => incrementProductCount(index)}>+</button>
+                <p>{product.count}</p>
+                <button onClick={() => decrementProductCount(index)}>-</button>
               </div>
 
               <img src={product.gallery[0]} alt={product.name} />
