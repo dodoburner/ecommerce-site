@@ -44,9 +44,11 @@ class App extends Component {
       categories: [],
       currentCategory: {},
       currentCurrency: "$",
+      cart: [],
     };
     this.updateCurrentCategory = this.updateCurrentCategory.bind(this);
     this.updateCurrentCurrency = this.updateCurrentCurrency.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +68,12 @@ class App extends Component {
     this.setState({ currentCurrency: value });
   }
 
+  addToCart(product) {
+    this.setState((prevState) => ({
+      cart: [...prevState.cart, product],
+    }));
+  }
+
   render() {
     return (
       <div className="App">
@@ -74,7 +82,7 @@ class App extends Component {
           updateCurrentCategory={this.updateCurrentCategory}
           updateCurrentCurrency={this.updateCurrentCurrency}
         />
-        <Category state={this.state} />
+        <Category state={this.state} addToCart={this.addToCart} />
       </div>
     );
   }

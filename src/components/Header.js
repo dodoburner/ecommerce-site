@@ -1,4 +1,5 @@
 import { Component } from "react";
+import HeaderCart from "./HeaderCart";
 import logo from "../assets/a-logo.png";
 import iconDown from "../assets/icon-down.png";
 import iconUp from "../assets/icon-up.png";
@@ -8,14 +9,21 @@ class Header extends Component {
     super(props);
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
     this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
-    this.handleOpenDropdown = this.handleOpenDropdown.bind(this);
+    this.handleOpenCurrencyDropdown =
+      this.handleOpenCurrencyDropdown.bind(this);
+    this.handleOpenCart = this.handleOpenCart.bind(this);
     this.state = {
-      dropdownOpen: false,
+      currencyDropdownOpen: false,
+      cartOpen: false,
     };
   }
 
-  handleOpenDropdown() {
-    this.setState({ dropdownOpen: !this.state.dropdownOpen });
+  handleOpenCurrencyDropdown() {
+    this.setState({ currencyDropdownOpen: !this.state.currencyDropdownOpen });
+  }
+
+  handleOpenCart() {
+    this.setState({ cartOpen: !this.state.cartOpen });
   }
 
   handleCategoryClick(value) {
@@ -39,8 +47,9 @@ class Header extends Component {
   }
 
   render() {
-    const { categories, currentCategory, currentCurrency } = this.props.state;
-    const { dropdownOpen } = this.state;
+    const { categories, currentCategory, currentCurrency, cart } =
+      this.props.state;
+    const { currencyDropdownOpen } = this.state;
 
     return (
       <header>
@@ -63,22 +72,29 @@ class Header extends Component {
         <img className="logo" src={logo} alt="store logo" />
 
         <div className="currency-cart-container">
-          <button
+          <div
             className="currency-changer"
-            onClick={this.handleOpenDropdown}
+            onClick={this.handleOpenCurrencyDropdown}
           >
             {currentCurrency}
-            <img src={dropdownOpen ? iconUp : iconDown} alt="icon-down" />
+            <img
+              src={currencyDropdownOpen ? iconUp : iconDown}
+              alt="icon-down"
+            />
             <ul className="currency-dropdown">
               {"products" in currentCategory &&
-                dropdownOpen &&
+                currencyDropdownOpen &&
                 this.renderCurrencies()}
             </ul>
-          </button>
+          </div>
 
-          <button>
-            <img src={emptyCart} alt="empty cart" />
-          </button>
+          <img className="cart-img" src={emptyCart} alt="empty cart" onClick={this.handleOpenCart}/>
+
+          {this.state.cartOpen && (
+            <div className="cart-container">
+              <HeaderCart state={this.props.state} />
+            </div>
+          )}
         </div>
       </header>
     );

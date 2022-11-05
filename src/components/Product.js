@@ -17,8 +17,12 @@ class Product extends Component {
     this.setState({ isHovering: false });
   };
 
+  handleClick = (product) => {
+    this.props.addToCart(product)
+  }
+
   render() {
-    const { product, currentCurrency } = this.props;
+    const { product, currentCurrency, addToCart } = this.props;
     const { isHovering } = this.state;
     const price = product.prices.find((el) => el.currency.symbol === currentCurrency);
 
@@ -28,14 +32,15 @@ class Product extends Component {
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
+        {!product.inStock && <div className="out-of-stock">OUT OF STOCK</div>}
         <img className="product-img" src={product.gallery[0]} alt="product" />
         <p className="product-name">{product.name}</p>
         <p className="product-price">
           {price.currency.symbol}
           {price.amount}
         </p>
-        {isHovering && (
-          <div className="product-cart">
+        {isHovering && product.inStock && (
+          <div className="product-cart" onClick={() => this.handleClick(product)}>
             <img src={emptyCart} alt="empty cart" />
           </div>
         )}
