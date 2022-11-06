@@ -7,6 +7,7 @@ class CartItem extends Component {
   }
 
   getAttributeItems(attribute) {
+    const { isLarge } = this.props.state;
     const selectedValue = attribute.selected.displayValue;
     let items = attribute.items.map((item) => {
       const isSelected = selectedValue === item.displayValue;
@@ -62,9 +63,9 @@ class CartItem extends Component {
         </div>
 
         <div className="cart-item-amount">
-          <button onClick={() => incrementProductCount(index)}>+</button>
+          <button onClick={() => incrementProductCount(product.cartId)}>+</button>
           <p>{product.count}</p>
-          <button onClick={() => decrementProductCount(index)}>-</button>
+          <button onClick={() => decrementProductCount(product.cartId)}>-</button>
         </div>
 
         <img src={product.gallery[0]} alt={product.name} />

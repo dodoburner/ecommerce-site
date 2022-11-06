@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Category from "./components/Category";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Cart from "./components/Cart";
+import { v4 as uuidv4 } from 'uuid';
 
 const getData = gql`
   {
@@ -53,7 +54,7 @@ class App extends Component {
     this.updateCurrentCurrency = this.updateCurrentCurrency.bind(this);
     this.incrementProductCount = this.incrementProductCount.bind(this);
     this.decrementProductCount = this.decrementProductCount.bind(this);
-    // this.updateSelectedAttribute = this.updateSelectedAttribute.bind(this);
+    this.updateSelectedAttribute = this.updateSelectedAttribute.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
 
@@ -102,6 +103,7 @@ class App extends Component {
           cartCount: (prevState.cartCount += 1),
         };
       } else {
+        product = {...product, cartId: uuidv4()}
         return {
           cart: [...prevState.cart, product],
           cartCount: (prevState.cartCount += 1),
@@ -110,33 +112,35 @@ class App extends Component {
     });
   }
 
-  incrementProductCount(index) {
+  incrementProductCount(cartId) {
     this.setState((prevState) => {
-      const product = prevState.cart.find((product, i) => i === index);
+      const product = prevState.cart.find((product) => cartId === product.cartId);
       product.count += 1;
       return { cart: prevState.cart, cartCount: (prevState.cartCount += 1) };
     });
   }
 
-  decrementProductCount(index) {
+  decrementProductCount(cartId) {
     this.setState((prevState) => {
-      const product = prevState.cart.find((product, i) => i === index);
+      const product = prevState.cart.find((product) => cartId === product.cartId);
       if (product.count === 1) {
+        const index = prevState.cart.indexOf(product)
         prevState.cart.splice(index, 1);
+      } else {
+        product.count -= 1;
       }
-      product.count -= 1;
-      return { cart: prevState.cart, cartCount: (prevState.cartCount -= 1) };
+      return { cart: [...prevState.cart], cartCount: (prevState.cartCount -= 1) };
     });
   }
 
-  // updateSelectedAttribute(product, attribute, item) {
-  //   this.setState((prevState) => {
-  //     const prod = prevState.cart.find((el) => el.id === product.id);
-  //     const attr = prod.attributes.find((attr) => attr.name === attribute.name)
-  //     attr.selected = item
-  //     return { cart: prevState.cart }
-  //   })
-  // }
+  updateSelectedAttribute(product, attribute, item) {
+    this.setState((prevState) => {
+      const prod = prevState.cart.find((el) => el.cartId === product.cartId);
+      const attr = prod.attributes.find((attr) => attr.name === attribute.name)
+      attr.selected = item
+      return { cart: [...prevState.cart ]}
+    })
+  }
 
   render() {
     return (
