@@ -41,9 +41,12 @@ header ul li {
 }
 
 .header-active {
+  position: relative;
+}
+
+.header-active a {
   font-weight: 600;
   color: #5ECE7B;
-  position: relative;
 }
 
 .header-active-line {

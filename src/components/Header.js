@@ -50,7 +50,11 @@ class Header extends Component {
   render() {
     const { categories, currentCategory, currentCurrency, cartCount } =
       this.props.state;
-    const { incrementProductCount, decrementProductCount, updateSelectedAttribute } = this.props;
+    const {
+      incrementProductCount,
+      decrementProductCount,
+      updateSelectedAttribute,
+    } = this.props;
     const { currencyDropdownOpen } = this.state;
 
     return (
@@ -64,7 +68,7 @@ class Header extends Component {
                 key={category.name}
                 onClick={() => this.handleCategoryClick(category)}
               >
-                {category.name}
+                <Link to="/"> {category.name}</Link>
                 {headerActive ? (
                   <div className="header-active-line"></div>
                 ) : null}

@@ -1,14 +1,22 @@
 import { Component } from "react";
+import iconLeft from "../assets/icon-left.png";
+import iconRight from "../assets/icon-right.png";
 
 class CartItem extends Component {
   constructor(props) {
     super(props);
     this.getAttributeItems = this.getAttributeItems.bind(this);
+    this.updateImgIndex = this.updateImgIndex.bind(this);
+    this.renderImg = this.renderImg.bind(this);
+    this.state = {
+        imgIndex: 0,
+    };
   }
 
   getAttributeItems(product, attribute) {
     const { isLarge, updateSelectedAttribute } = this.props.state;
     const selectedValue = attribute.selected.displayValue;
+
     let items = attribute.items.map((item) => {
       const isSelected = selectedValue === item.displayValue;
       return attribute.type === "text" ? (
@@ -41,6 +49,38 @@ class CartItem extends Component {
     });
 
     return items;
+  }
+
+  renderImg() {
+    const { product } = this.props.state;
+    const { imgIndex } = this.state;
+
+    return (
+      <div className="img-container">
+        <div className="left-sign" onClick={() => this.updateImgIndex('decrement', product)}>
+          <img src={iconLeft} alt="previous" />
+        </div>
+        <img
+          className="product-img"
+          src={product.gallery[imgIndex]}
+          alt={product.name}
+        />
+        <div className="right-sign" onClick={() => this.updateImgIndex('increment', product)}>
+          <img src={iconRight} alt="next" />
+        </div>
+      </div>
+    );
+  }
+
+  updateImgIndex(operation, product) {
+    const galleryLength = product.gallery.length - 1;
+    const { imgIndex } = this.state;
+
+    if (operation === 'decrement' && imgIndex > 0) {
+      this.setState((prevState) => ({ imgIndex: prevState.imgIndex - 1}))
+    } else if (operation === 'increment' && imgIndex < galleryLength) {
+      this.setState((prevState) => ({ imgIndex: prevState.imgIndex + 1}))
+    }
   }
 
   render() {
@@ -87,7 +127,11 @@ class CartItem extends Component {
           </button>
         </div>
 
-        <img src={product.gallery[0]} alt={product.name} />
+        {isLarge ? (
+          this.renderImg()
+        ) : (
+          <img src={product.gallery[0]} alt={product.name} />
+        )}
       </div>
     );
   }
