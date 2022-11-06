@@ -55,15 +55,17 @@ class Header extends Component {
       <header>
         <ul className="category-list">
           {categories.map((category) => {
+            const headerActive = currentCategory.name === category.name;
             return (
               <li
                 className={
-                  currentCategory.name === category.name ? "header-active" : ""
+                  headerActive ? "header-active" : ""
                 }
                 key={category.name}
                 onClick={() => this.handleCategoryClick(category)}
               >
                 {category.name}
+                {headerActive ? <div className="header-active-line"></div> : null}
               </li>
             );
           })}

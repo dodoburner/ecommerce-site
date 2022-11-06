@@ -42,7 +42,16 @@ header ul li {
 .header-active {
   font-weight: 600;
   color: #5ECE7B;
+  position: relative;
+}
+
+.header-active-line {
   border-bottom: 2px solid #5ECE7B;
+  position: absolute;
+  left: 0;
+  right: -16px;
+  left: -16px;
+  bottom: -30px
 }
 
 .currency-cart-container {
