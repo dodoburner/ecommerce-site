@@ -3,6 +3,8 @@ import { client } from ".";
 import { gql } from "@apollo/client";
 import Header from "./components/Header";
 import Category from "./components/Category";
+import { Route, Routes } from "react-router-dom";
+import Cart from "./components/Cart";
 
 const getData = gql`
   {
@@ -90,7 +92,7 @@ class App extends Component {
           ) {
             isSame = false;
           }
-        });  
+        });
       }
 
       if (sameProduct && isSame) {
@@ -146,7 +148,16 @@ class App extends Component {
           incrementProductCount={this.incrementProductCount}
           decrementProductCount={this.decrementProductCount}
         />
-        <Category state={this.state} addToCart={this.addToCart} />
+        <Routes>
+          <Route
+            path="/"
+            element={<Category state={this.state} addToCart={this.addToCart} />}
+          />
+          <Route
+            path="/cart"
+            element={<Cart state={this.state} addToCart={this.addToCart} />}
+          />
+        </Routes>
       </div>
     );
   }
