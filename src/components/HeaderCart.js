@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import "../styles/headerCart.css";
+import "../styles/cart.css";
 import CartItem from "./CartItem";
 
 class HeaderCart extends Component {

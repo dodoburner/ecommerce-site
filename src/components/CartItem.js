@@ -5,7 +5,7 @@ class CartItem extends Component {
     super(props);
     this.getAttributeItems = this.getAttributeItems.bind(this);
   }
-  
+
   getAttributeItems(attribute) {
     const selectedValue = attribute.selected.displayValue;
     let items = attribute.items.map((item) => {
@@ -40,6 +40,7 @@ class CartItem extends Component {
     return (
       <div className={isLarge ? 'cart-item-large' : 'cart-item'}>
         <div className="cart-item-info">
+          <p className="cart-item-brand">{product.brand}</p>
           <p className="cart-item-name">{product.name}</p>
           <p className="cart-item-price">
             {currentCurrency}

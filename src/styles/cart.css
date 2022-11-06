@@ -7,7 +7,7 @@
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: #1D1F22;
+  background: #1d1f22;
   color: white;
   top: -50%;
   right: -50%;
@@ -95,13 +95,13 @@
   color: white;
 }
 
-.item-text-selected p{
+.item-text-selected p {
   color: white;
 }
 
 .item-swatch {
-  height: 21px;
-  width: 21px;
+  height: 20px;
+  width: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,7 +122,8 @@
   margin-bottom: 32px;
 }
 
-.cart-item-name {
+.cart-item-name,
+.cart-item-brand {
   font-weight: 300;
   margin-bottom: 4px;
 }
@@ -172,7 +173,7 @@
   border: 1px solid #1d1f22;
 }
 
-.view-bag-btn:hover {
+.view-bag-btn:hover, .cart-item-amount button:hover {
   background-color: #1d1f22;
   color: white;
 }
@@ -184,4 +185,106 @@
 
 .check-out-btn:hover {
   opacity: 0.5;
+}
+
+/* LARGE CART */
+
+.cart-page {
+  padding: 80px 100px;
+}
+
+.cart-page h1 {
+  padding-bottom: 55px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cart-info {
+  margin-top: 32px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  gap: 8px;
+}
+
+.cart-info div p{
+  margin-bottom: 8px;
+}
+
+.cart-info-numbers {
+  font-weight: 700;
+}
+
+.cart-page .check-out-btn {
+  width: 280px;
+  height: 43px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  margin-top: 8px;
+}
+
+.cart-item-large {
+  display: flex;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 24px 0;
+  font-size: 30px;
+  line-height: 27px;
+}
+
+.cart-item-large img {
+  height: 288px;
+  width: 200px;
+  margin-left: 24px;
+}
+
+.cart-item-large .cart-item-brand {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.cart-item-large .cart-item-name {
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.cart-item-large .cart-item-price {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+
+.cart-item-large .cart-item-attribute {
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+.cart-item-large .cart-item-attribute-name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 7px;
+}
+.cart-item-large .item-text {
+  height: 45px;
+  width: 63px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.cart-item-large .item-swatch {
+  height: 36px;
+  width: 36px;
+}
+
+.cart-item-large .item-swatch div {
+  height: 32px;
+  width: 32px;
+}
+
+.cart-item-large .cart-item-amount button {
+  height: 45px;
+  width: 45px;
+  font-size: 32px;
+  font-weight: 300;
 }
