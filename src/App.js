@@ -77,10 +77,35 @@ class App extends Component {
       return { ...attribute, selected: attribute.items[0] };
     });
     product = { ...product, attributes, count: 1 };
-    this.setState((prevState) => ({
-      cart: [...prevState.cart, product],
-      cartCount: (prevState.cartCount += 1),
-    }));
+
+    this.setState((prevState) => {
+      const sameProduct = prevState.cart.find((el) => product.id === el.id);
+      let isSame = true;
+
+      if (sameProduct) {
+        product.attributes.forEach((attr, index) => {
+          if (
+            attr.selected.displayValue !==
+            sameProduct.attributes[index].selected.displayValue
+          ) {
+            isSame = false;
+          }
+        });  
+      }
+
+      if (sameProduct && isSame) {
+        sameProduct.count += 1;
+        return {
+          cart: [...prevState.cart],
+          cartCount: (prevState.cartCount += 1),
+        };
+      } else {
+        return {
+          cart: [...prevState.cart, product],
+          cartCount: (prevState.cartCount += 1),
+        };
+      }
+    });
   }
 
   incrementProductCount(index) {
