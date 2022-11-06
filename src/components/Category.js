@@ -1,6 +1,5 @@
 import { Component } from "react";
 import Product from "./Product";
-
 class Category extends Component {
   render() {
     const { currentCategory: category, currentCurrency } = this.props.state;

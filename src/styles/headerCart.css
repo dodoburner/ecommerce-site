@@ -95,7 +95,7 @@
   color: white;
 }
 
-.item-text-selected p {
+.item-text-selected p{
   color: white;
 }
 
@@ -162,6 +162,10 @@
   font-size: 14px;
   line-height: 120%;
   transition: 0.2s;
+}
+
+.cart-buttons a {
+  width: 100%;
 }
 
 .view-bag-btn {

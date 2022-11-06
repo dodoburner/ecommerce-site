@@ -3,7 +3,7 @@ import { client } from ".";
 import { gql } from "@apollo/client";
 import Header from "./components/Header";
 import Category from "./components/Category";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import Cart from "./components/Cart";
 
 const getData = gql`
@@ -141,22 +141,33 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header
-          state={this.state}
-          updateCurrentCategory={this.updateCurrentCategory}
-          updateCurrentCurrency={this.updateCurrentCurrency}
-          incrementProductCount={this.incrementProductCount}
-          decrementProductCount={this.decrementProductCount}
-        />
         <Routes>
           <Route
             path="/"
-            element={<Category state={this.state} addToCart={this.addToCart} />}
-          />
-          <Route
-            path="/cart"
-            element={<Cart state={this.state} addToCart={this.addToCart} />}
-          />
+            element={
+              <div>
+                 <Header
+                state={this.state}
+                updateCurrentCategory={this.updateCurrentCategory}
+                updateCurrentCurrency={this.updateCurrentCurrency}
+                incrementProductCount={this.incrementProductCount}
+                decrementProductCount={this.decrementProductCount}
+                />
+                <Outlet />
+             </div>
+            }
+          >
+            <Route
+              index
+              element={
+                <Category state={this.state} addToCart={this.addToCart} />
+              }
+            />
+            <Route
+              path="/cart"
+              element={<Cart state={this.state} addToCart={this.addToCart} />}
+            />
+          </Route>
         </Routes>
       </div>
     );

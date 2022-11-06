@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import "../styles/headerCart.css";
 
 class HeaderCart extends Component {
@@ -11,10 +12,10 @@ class HeaderCart extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const prevCart = prevProps.state
-    const cart = this.props.state
+    const prevCart = prevProps.state;
+    const cart = this.props.state;
     if (prevCart !== cart) {
-      this.setState({ total: this.countTotal() })
+      this.setState({ total: this.countTotal() });
     }
   }
 
@@ -35,9 +36,7 @@ class HeaderCart extends Component {
     let items = attribute.items.map((item) => {
       const isSelected = selectedValue === item.displayValue;
       return attribute.type === "text" ? (
-        <div
-          className={`item-text ${isSelected ? "item-text-selected" : ""}`}
-        >
+        <div className={`item-text ${isSelected ? "item-text-selected" : ""}`}>
           <p>{item.displayValue}</p>
         </div>
       ) : (
@@ -54,7 +53,7 @@ class HeaderCart extends Component {
 
   render() {
     const { cart, currentCurrency } = this.props.state;
-    const { incrementProductCount, decrementProductCount } = this.props;
+    const { incrementProductCount, decrementProductCount, handleOpenCart } = this.props;
 
     return (
       <div className="cart">
@@ -112,7 +111,9 @@ class HeaderCart extends Component {
         </p>
 
         <div className="cart-buttons">
-          <button className="view-bag-btn">VIEW BAG</button>
+          <Link to="/cart" onClick={handleOpenCart}>
+            <button className="view-bag-btn">VIEW BAG</button>
+          </Link>
           <button className="check-out-btn">CHECK OUT</button>
         </div>
       </div>
