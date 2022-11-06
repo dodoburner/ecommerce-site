@@ -146,15 +146,15 @@ class App extends Component {
             path="/"
             element={
               <div>
-                 <Header
-                state={this.state}
-                updateCurrentCategory={this.updateCurrentCategory}
-                updateCurrentCurrency={this.updateCurrentCurrency}
-                incrementProductCount={this.incrementProductCount}
-                decrementProductCount={this.decrementProductCount}
+                <Header
+                  state={this.state}
+                  updateCurrentCategory={this.updateCurrentCategory}
+                  updateCurrentCurrency={this.updateCurrentCurrency}
+                  incrementProductCount={this.incrementProductCount}
+                  decrementProductCount={this.decrementProductCount}
                 />
                 <Outlet />
-             </div>
+              </div>
             }
           >
             <Route
@@ -165,7 +165,14 @@ class App extends Component {
             />
             <Route
               path="/cart"
-              element={<Cart state={this.state} addToCart={this.addToCart} />}
+              element={
+                <Cart
+                  state={this.state}
+                  addToCart={this.addToCart}
+                  incrementProductCount={this.incrementProductCount}
+                  decrementProductCount={this.decrementProductCount}
+                />
+              }
             />
           </Route>
         </Routes>

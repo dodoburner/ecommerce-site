@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import "../styles/headerCart.css";
+import CartItem from "./CartItem";
 
 class HeaderCart extends Component {
   constructor(props) {
@@ -8,7 +9,6 @@ class HeaderCart extends Component {
     this.state = {
       total: this.countTotal(),
     };
-    this.getAttributeItems = this.getAttributeItems.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -31,29 +31,10 @@ class HeaderCart extends Component {
     return total.toFixed(2);
   }
 
-  getAttributeItems(attribute) {
-    const selectedValue = attribute.selected.displayValue;
-    let items = attribute.items.map((item) => {
-      const isSelected = selectedValue === item.displayValue;
-      return attribute.type === "text" ? (
-        <div className={`item-text ${isSelected ? "item-text-selected" : ""}`}>
-          <p>{item.displayValue}</p>
-        </div>
-      ) : (
-        <div
-          className={`item-swatch ${isSelected ? "item-swatch-selected" : ""}`}
-        >
-          <div style={{ background: item.value }}></div>
-        </div>
-      );
-    });
-
-    return items;
-  }
-
   render() {
     const { cart, currentCurrency } = this.props.state;
-    const { incrementProductCount, decrementProductCount, handleOpenCart } = this.props;
+    const { incrementProductCount, decrementProductCount, handleOpenCart } =
+      this.props;
 
     return (
       <div className="cart">
@@ -67,38 +48,16 @@ class HeaderCart extends Component {
           );
 
           return (
-            <div className="cart-item">
-              <div className="cart-item-info">
-                <p className="cart-item-name">{product.name}</p>
-                <p className="cart-item-price">
-                  {currentCurrency}
-                  {price.amount}
-                </p>
-
-                <div className="cart-item-attributes-container">
-                  {product.attributes.map((attribute) => {
-                    const items = this.getAttributeItems(attribute);
-
-                    return (
-                      <div className="cart-item-attribute">
-                        <p className="cart-item-attribute-name">
-                          {attribute.name}
-                        </p>
-                        <div className="cart-item-attribute-items">{items}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="cart-item-amount">
-                <button onClick={() => incrementProductCount(index)}>+</button>
-                <p>{product.count}</p>
-                <button onClick={() => decrementProductCount(index)}>-</button>
-              </div>
-
-              <img src={product.gallery[0]} alt={product.name} />
-            </div>
+            <CartItem
+              state={{
+                ...this.props.state,
+                product,
+                index,
+                price,
+                incrementProductCount,
+                decrementProductCount,
+              }}
+            />
           );
         })}
 
