@@ -156,6 +156,7 @@ class App extends Component {
                   updateCurrentCurrency={this.updateCurrentCurrency}
                   incrementProductCount={this.incrementProductCount}
                   decrementProductCount={this.decrementProductCount}
+                  updateSelectedAttribute={this.updateSelectedAttribute}
                 />
                 <Outlet />
               </div>
@@ -175,6 +176,7 @@ class App extends Component {
                   addToCart={this.addToCart}
                   incrementProductCount={this.incrementProductCount}
                   decrementProductCount={this.decrementProductCount}
+                  updateSelectedAttribute={this.updateSelectedAttribute}
                 />
               }
             />

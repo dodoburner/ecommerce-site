@@ -6,18 +6,34 @@ class CartItem extends Component {
     this.getAttributeItems = this.getAttributeItems.bind(this);
   }
 
-  getAttributeItems(attribute) {
-    const { isLarge } = this.props.state;
+  getAttributeItems(product, attribute) {
+    const { isLarge, updateSelectedAttribute } = this.props.state;
     const selectedValue = attribute.selected.displayValue;
     let items = attribute.items.map((item) => {
       const isSelected = selectedValue === item.displayValue;
       return attribute.type === "text" ? (
-        <div className={`item-text ${isSelected ? "item-text-selected" : ""}`}>
+        <div
+          className={`item-text ${isSelected ? "item-text-selected" : ""}`}
+          onClick={
+            isLarge
+              ? () => {
+                  updateSelectedAttribute(product, attribute, item);
+                }
+              : null
+          }
+        >
           <p>{item.displayValue}</p>
         </div>
       ) : (
         <div
           className={`item-swatch ${isSelected ? "item-swatch-selected" : ""}`}
+          onClick={
+            isLarge
+              ? () => {
+                  updateSelectedAttribute(product, attribute, item);
+                }
+              : null
+          }
         >
           <div style={{ background: item.value }}></div>
         </div>
@@ -30,7 +46,6 @@ class CartItem extends Component {
   render() {
     const {
       product,
-      index,
       incrementProductCount,
       decrementProductCount,
       currentCurrency,
@@ -39,7 +54,7 @@ class CartItem extends Component {
     } = this.props.state;
 
     return (
-      <div className={isLarge ? 'cart-item-large' : 'cart-item'}>
+      <div className={isLarge ? "cart-item-large" : "cart-item"}>
         <div className="cart-item-info">
           <p className="cart-item-brand">{product.brand}</p>
           <p className="cart-item-name">{product.name}</p>
@@ -50,7 +65,7 @@ class CartItem extends Component {
 
           <div className="cart-item-attributes-container">
             {product.attributes.map((attribute) => {
-              const items = this.getAttributeItems(attribute);
+              const items = this.getAttributeItems(product, attribute);
 
               return (
                 <div className="cart-item-attribute">
@@ -63,9 +78,13 @@ class CartItem extends Component {
         </div>
 
         <div className="cart-item-amount">
-          <button onClick={() => incrementProductCount(product.cartId)}>+</button>
+          <button onClick={() => incrementProductCount(product.cartId)}>
+            +
+          </button>
           <p>{product.count}</p>
-          <button onClick={() => decrementProductCount(product.cartId)}>-</button>
+          <button onClick={() => decrementProductCount(product.cartId)}>
+            -
+          </button>
         </div>
 
         <img src={product.gallery[0]} alt={product.name} />
@@ -74,4 +93,4 @@ class CartItem extends Component {
   }
 }
 
-export default CartItem
+export default CartItem;

@@ -31,7 +31,7 @@ class Cart extends Component {
 
   render() {
     const { cart, currentCurrency, cartCount } = this.props.state;
-    const { incrementProductCount, decrementProductCount } = this.props;
+    const { incrementProductCount, decrementProductCount, updateSelectedAttribute } = this.props;
     const tax = (this.state.total / 21).toFixed(2);
 
     return (
@@ -48,10 +48,10 @@ class Cart extends Component {
               state={{
                 ...this.props.state,
                 product,
-                index,
                 price,
                 incrementProductCount,
                 decrementProductCount,
+                updateSelectedAttribute,
                 isLarge: true,
               }}
             />

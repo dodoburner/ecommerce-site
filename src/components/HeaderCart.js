@@ -33,8 +33,12 @@ class HeaderCart extends Component {
 
   render() {
     const { cart, currentCurrency } = this.props.state;
-    const { incrementProductCount, decrementProductCount, handleOpenCart } =
-      this.props;
+    const {
+      incrementProductCount,
+      decrementProductCount,
+      handleOpenCart,
+      updateSelectedAttribute,
+    } = this.props;
 
     return (
       <div className="cart">
@@ -52,10 +56,10 @@ class HeaderCart extends Component {
               state={{
                 ...this.props.state,
                 product,
-                index,
                 price,
                 incrementProductCount,
                 decrementProductCount,
+                updateSelectedAttribute,
               }}
             />
           );

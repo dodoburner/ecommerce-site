@@ -50,7 +50,7 @@ class Header extends Component {
   render() {
     const { categories, currentCategory, currentCurrency, cartCount } =
       this.props.state;
-    const { incrementProductCount, decrementProductCount } = this.props;
+    const { incrementProductCount, decrementProductCount, updateSelectedAttribute } = this.props;
     const { currencyDropdownOpen } = this.state;
 
     return (
@@ -113,6 +113,7 @@ class Header extends Component {
                 state={this.props.state}
                 incrementProductCount={incrementProductCount}
                 decrementProductCount={decrementProductCount}
+                updateSelectedAttribute={updateSelectedAttribute}
                 handleOpenCart={this.handleOpenCart}
               />
             </div>
