@@ -2,9 +2,9 @@ import { Component } from "react";
 import { client } from ".";
 import { gql } from "@apollo/client";
 import Header from "./components/Header";
-import Category from "./components/Category";
+import Category from "./pages/Category";
 import { Outlet, Route, Routes } from "react-router-dom";
-import Cart from "./components/Cart";
+import Cart from "./pages/Cart";
 import { v4 as uuidv4 } from 'uuid';
 
 const getData = gql`

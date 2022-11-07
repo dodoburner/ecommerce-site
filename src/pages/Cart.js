@@ -1,5 +1,5 @@
 import { Component } from "react";
-import CartItem from "./CartItem";
+import CartItem from "../components/CartItem";
 class Cart extends Component {
   // Find way to move this from both carts to top level to follow DRY
   constructor(props) {
@@ -31,7 +31,11 @@ class Cart extends Component {
 
   render() {
     const { cart, currentCurrency, cartCount } = this.props.state;
-    const { incrementProductCount, decrementProductCount, updateSelectedAttribute } = this.props;
+    const {
+      incrementProductCount,
+      decrementProductCount,
+      updateSelectedAttribute,
+    } = this.props;
     const tax = (this.state.total / 21).toFixed(2);
 
     return (

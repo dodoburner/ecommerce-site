@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Product from "./Product";
+import Product from "../components/Product";
 class Category extends Component {
   render() {
     const { currentCategory: category, currentCurrency } = this.props.state;
