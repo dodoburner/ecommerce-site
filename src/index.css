@@ -25,6 +25,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  bottom: 25%;
 }
 
 .category-list {
@@ -147,8 +154,9 @@ header ul li {
 }
 
 .product-img {
-  height: 330px;
-  width: 354px;
+  height: 338px;
+  min-width: 356px;
+  width: 100%;
   margin-bottom: 24px;
 }
 
