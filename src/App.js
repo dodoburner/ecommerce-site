@@ -5,7 +5,8 @@ import Header from "./components/Header";
 import Category from "./pages/Category";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Cart from "./pages/Cart";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import ProductPage from "./pages/ProductPage";
 
 const getData = gql`
   {
@@ -103,7 +104,7 @@ class App extends Component {
           cartCount: (prevState.cartCount += 1),
         };
       } else {
-        product = {...product, cartId: uuidv4()}
+        product = { ...product, cartId: uuidv4() };
         return {
           cart: [...prevState.cart, product],
           cartCount: (prevState.cartCount += 1),
@@ -114,7 +115,9 @@ class App extends Component {
 
   incrementProductCount(cartId) {
     this.setState((prevState) => {
-      const product = prevState.cart.find((product) => cartId === product.cartId);
+      const product = prevState.cart.find(
+        (product) => cartId === product.cartId
+      );
       product.count += 1;
       return { cart: prevState.cart, cartCount: (prevState.cartCount += 1) };
     });
@@ -122,24 +125,29 @@ class App extends Component {
 
   decrementProductCount(cartId) {
     this.setState((prevState) => {
-      const product = prevState.cart.find((product) => cartId === product.cartId);
+      const product = prevState.cart.find(
+        (product) => cartId === product.cartId
+      );
       if (product.count === 1) {
-        const index = prevState.cart.indexOf(product)
+        const index = prevState.cart.indexOf(product);
         prevState.cart.splice(index, 1);
       } else {
         product.count -= 1;
       }
-      return { cart: [...prevState.cart], cartCount: (prevState.cartCount -= 1) };
+      return {
+        cart: [...prevState.cart],
+        cartCount: (prevState.cartCount -= 1),
+      };
     });
   }
 
   updateSelectedAttribute(product, attribute, item) {
     this.setState((prevState) => {
       const prod = prevState.cart.find((el) => el.cartId === product.cartId);
-      const attr = prod.attributes.find((attr) => attr.name === attribute.name)
-      attr.selected = item
-      return { cart: [...prevState.cart ]}
-    })
+      const attr = prod.attributes.find((attr) => attr.name === attribute.name);
+      attr.selected = item;
+      return { cart: [...prevState.cart] };
+    });
   }
 
   render() {
@@ -178,6 +186,12 @@ class App extends Component {
                   decrementProductCount={this.decrementProductCount}
                   updateSelectedAttribute={this.updateSelectedAttribute}
                 />
+              }
+            />
+            <Route
+              path="/:category/:id"
+              element={
+                <ProductPage state={this.state} addToCart={this.addToCart} />
               }
             />
           </Route>
