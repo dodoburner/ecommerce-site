@@ -1,4 +1,6 @@
 import { Component } from "react";
+import AddRemoveItemBtns from "../components/AddRemoveItemBtns";
+import CartImgGallery from "../components/CartImgGallery";
 import CartItem from "../components/CartItem";
 class Cart extends Component {
   // Find way to move this from both carts to top level to follow DRY
@@ -48,17 +50,19 @@ class Cart extends Component {
           );
 
           return (
-            <CartItem
-              state={{
-                ...this.props.state,
-                product,
-                price,
-                incrementProductCount,
-                decrementProductCount,
-                updateSelectedAttribute,
-                isLarge: true,
-              }}
-            />
+            <div className="cart-item-large">
+              <CartItem
+                state={{
+                  ...this.props.state,
+                  product,
+                  updateSelectedAttribute
+                }}
+              />
+              <AddRemoveItemBtns
+                state={{product, incrementProductCount, decrementProductCount}}
+              />
+              <CartImgGallery product={product} />
+            </div>
           );
         })}
 

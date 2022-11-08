@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import "../styles/cart.css";
+import AddRemoveItemBtns from "./AddRemoveItemBtns";
 import CartItem from "./CartItem";
 
 class HeaderCart extends Component {
@@ -34,9 +35,9 @@ class HeaderCart extends Component {
   render() {
     const { cart, currentCurrency } = this.props.state;
     const {
+      handleOpenCart,
       incrementProductCount,
       decrementProductCount,
-      handleOpenCart,
       updateSelectedAttribute,
     } = this.props;
 
@@ -47,21 +48,24 @@ class HeaderCart extends Component {
         </p>
 
         {cart.map((product, index) => {
-          const price = product.prices.find(
-            (el) => el.currency.symbol === currentCurrency
-          );
-
           return (
-            <CartItem
-              state={{
-                ...this.props.state,
-                product,
-                price,
-                incrementProductCount,
-                decrementProductCount,
-                updateSelectedAttribute,
-              }}
-            />
+            <div className="cart-item">
+              <CartItem
+                state={{
+                  ...this.props.state,
+                  product,
+                  updateSelectedAttribute,
+                }}
+              />
+              <AddRemoveItemBtns
+                state={{
+                  product,
+                  incrementProductCount,
+                  decrementProductCount,
+                }}
+              />
+              <img src={product.gallery[0]} alt={product.name} />
+            </div>
           );
         })}
 
