@@ -45,17 +45,14 @@ class Cart extends Component {
         <h1>CART</h1>
 
         {cart.map((product, index) => {
-          const price = product.prices.find(
-            (el) => el.currency.symbol === currentCurrency
-          );
-
           return (
-            <div className="cart-item-large">
+            <div className="cart-item-large" key={index}>
               <CartItem
                 state={{
                   ...this.props.state,
                   product,
-                  updateSelectedAttribute
+                  updateSelectedAttribute,
+                  isLarge: true
                 }}
               />
               <AddRemoveItemBtns

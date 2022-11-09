@@ -1,4 +1,5 @@
 import { Component } from "react";
+import AttributeItem from "./AttributeItem";
 
 export default class CartItem extends Component {
   constructor(props) {
@@ -7,38 +8,12 @@ export default class CartItem extends Component {
   }
 
   getAttributeItems(product, attribute) {
-    const { isLarge, updateSelectedAttribute } = this.props.state;
-    const selectedAttr = attribute.selected;
-
     let items = attribute.items.map((item) => {
-      const isSelected =
-        selectedAttr && selectedAttr.displayValue === item.displayValue;
-      return attribute.type === "text" ? (
-        <div
-          className={`item-text ${isSelected ? "item-text-selected" : ""}`}
-          onClick={
-            isLarge
-              ? () => {
-                  updateSelectedAttribute(product, attribute, item);
-                }
-              : null
-          }
-        >
-          <p>{item.displayValue}</p>
-        </div>
-      ) : (
-        <div
-          className={`item-swatch ${isSelected ? "item-swatch-selected" : ""}`}
-          onClick={
-            isLarge
-              ? () => {
-                  updateSelectedAttribute(product, attribute, item);
-                }
-              : null
-          }
-        >
-          <div style={{ background: item.value }}></div>
-        </div>
+      return (
+        <AttributeItem
+          key={item.displayValue}
+          state={{ ...this.props.state, product, item, attribute }}
+        />
       );
     });
 

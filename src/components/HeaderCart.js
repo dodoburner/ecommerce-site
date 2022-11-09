@@ -49,7 +49,7 @@ class HeaderCart extends Component {
 
         {cart.map((product, index) => {
           return (
-            <div className="cart-item">
+            <div className="cart-item" key={index}>
               <CartItem
                 state={{
                   ...this.props.state,
