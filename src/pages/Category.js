@@ -11,14 +11,21 @@ class Category extends Component {
           <>
             <h1 className="category-name">{category.name}</h1>
             <div className="products-grid">
-              {category.products.map((product) => (
-                <Product
-                  key={product.name}
-                  product={product}
-                  currentCurrency={currentCurrency}
-                  addToCart={addToCart}
-                />
-              ))}
+              {category.products.map((product) => {
+                const attributes = product.attributes.map((attribute) => {
+                  return { ...attribute, selected: attribute.items[0] };
+                });
+                product = { ...product, attributes, count: 1 };
+
+                return (
+                  <Product
+                    key={product.name}
+                    product={product}
+                    currentCurrency={currentCurrency}
+                    addToCart={addToCart}
+                  />
+                );
+              })}
             </div>
           </>
         )}

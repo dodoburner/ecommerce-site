@@ -7,7 +7,8 @@ export default class CartItem extends Component {
     this.getAttributeItems = this.getAttributeItems.bind(this);
   }
 
-  getAttributeItems(product, attribute) {
+  getAttributeItems(attribute) {
+    const { product } = this.props.state;
     let items = attribute.items.map((item) => {
       return (
         <AttributeItem
@@ -38,11 +39,11 @@ export default class CartItem extends Component {
 
           <div className="cart-item-attributes-container">
             {product.attributes.map((attribute) => {
-              const items = this.getAttributeItems(product, attribute);
+              const items = this.getAttributeItems(attribute);
 
               return (
-                <div className="cart-item-attribute">
-                  <p className="cart-item-attribute-name">{attribute.name}</p>
+                <div key={attribute.name} className="cart-item-attribute">
+                  <p className="cart-item-attribute-name">{attribute.name}:</p>
                   <div className="cart-item-attribute-items">{items}</div>
                 </div>
               );

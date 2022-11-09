@@ -1,47 +1,13 @@
 import { Component } from "react";
 import { client } from ".";
-import { gql } from "@apollo/client";
+import { Outlet, Route, Routes } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import Header from "./components/Header";
 import Category from "./pages/Category";
-import { Outlet, Route, Routes } from "react-router-dom";
 import Cart from "./pages/Cart";
-import { v4 as uuidv4 } from "uuid";
 import ProductPage from "./pages/ProductPage";
-
-const getData = gql`
-  {
-    categories {
-      name
-      products {
-        id
-        name
-        inStock
-        gallery
-        description
-        category
-        attributes {
-          id
-          name
-          type
-          items {
-            displayValue
-            value
-            id
-          }
-        }
-        prices {
-          currency {
-            label
-            symbol
-          }
-          amount
-        }
-        brand
-      }
-    }
-  }
-`;
-class App extends Component {
+import getData from "./getData";
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -77,11 +43,6 @@ class App extends Component {
   }
 
   addToCart(product) {
-    const attributes = product.attributes.map((attribute) => {
-      return { ...attribute, selected: attribute.items[0] };
-    });
-    product = { ...product, attributes, count: 1 };
-
     this.setState((prevState) => {
       const sameProduct = prevState.cart.find((el) => product.id === el.id);
       let isSame = true;
@@ -200,5 +161,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

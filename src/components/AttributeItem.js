@@ -6,7 +6,6 @@ export default class AttributeItem extends Component {
     const selectedAttr = attribute.selected;
     const isSelected =
       selectedAttr && selectedAttr.displayValue === item.displayValue;
-    console.log(isLarge)
 
     return attribute.type === "text" ? (
       <div
