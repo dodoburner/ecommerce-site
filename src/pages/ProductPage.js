@@ -7,8 +7,10 @@ class ProductPage extends Component {
   constructor(props) {
     super(props);
     this.updateSelectedAttribute = this.updateSelectedAttribute.bind(this);
+    this.updateImg = this.updateImg.bind(this);
     this.state = {
       product: null,
+      img: null,
     };
   }
 
@@ -23,7 +25,10 @@ class ProductPage extends Component {
       const attributes = product.attributes.map((attribute) => {
         return { ...attribute, selected: attribute.items[0] };
       });
-      this.setState({ product: { ...product, attributes, count: 1 } });
+      this.setState({
+        product: { ...product, attributes, count: 1 },
+        img: product.gallery[0],
+      });
     };
 
     fetchProduct();
@@ -37,8 +42,12 @@ class ProductPage extends Component {
     this.setState({ product });
   }
 
+  updateImg(img) {
+    this.setState({ img });
+  }
+
   render() {
-    const { product } = this.state;
+    const { product, img } = this.state;
     const { currentCurrency } = this.props.state;
     const price = product
       ? product.prices.find((el) => el.currency.symbol === currentCurrency)
@@ -50,11 +59,19 @@ class ProductPage extends Component {
       <div className="product-page">
         {product ? (
           <div className="cart-item-large">
-            <img
-              className="product-page-img"
-              src={product.gallery[0]}
-              alt={product.name}
-            />
+            <div className="product-page-imgs">
+              {product.gallery.map((img) => {
+                return (
+                  <img
+                    className="product-page-img-small"
+                    src={img}
+                    alt={product.name}
+                    onClick={() => this.updateImg(img)}
+                  />
+                );
+              })}
+            </div>
+            <img className="product-page-img" src={img} alt={product.name} />
 
             <div>
               <CartItem

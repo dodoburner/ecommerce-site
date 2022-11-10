@@ -334,6 +334,10 @@
   padding: 70px 100px;
 }
 
+.product-page .cart-item-large {
+  border-bottom: none;
+}
+
 .product-page .cart-item-name {
   margin-bottom: 43px;
 }
@@ -347,10 +351,26 @@
   margin-top: 0;
 }
 
+.product-page-imgs {
+  display: grid;
+  row-gap: 50px;
+}
+
 .product-page-img {
   height: 511px;
   width: 610px;
+  margin-left: 40px;
   margin-right: 100px;
+}
+
+.product-page-img-small {
+  height: 80px;
+  width: 80px;
+  cursor: pointer;
+}
+
+.product-page-img-small:hover {
+  opacity: 0.5;
 }
 
 .product-page-price {
