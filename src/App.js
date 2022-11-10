@@ -44,30 +44,32 @@ export default class App extends Component {
 
   addToCart(product) {
     this.setState((prevState) => {
-      const sameProduct = prevState.cart.find((el) => product.id === el.id);
-      let isSame = true;
+      const sameProduct = prevState.cart.find((el) => {
+        let isSame = false
+        if (el.id === product.id) {
+          isSame = true
+          product.attributes.forEach((attr, index) => {
+            if (
+              attr.selected.id !==
+              el.attributes[index].selected.id
+            ) {
+              isSame = false;
+            }
+          });
+        }
+        return isSame
+      });
 
       if (sameProduct) {
-        product.attributes.forEach((attr, index) => {
-          if (
-            attr.selected.id !==
-            sameProduct.attributes[index].selected.id
-          ) {
-            isSame = false;
-          }
-        });
-      }
-
-      if (sameProduct && isSame) {
         sameProduct.count += 1;
         return {
           cart: [...prevState.cart],
           cartCount: (prevState.cartCount += 1),
         };
       } else {
-        product = { ...product, cartId: uuidv4() };
+        const cartProduct = { ...product, cartId: uuidv4() };
         return {
-          cart: [...prevState.cart, product],
+          cart: [...prevState.cart, cartProduct],
           cartCount: (prevState.cartCount += 1),
         };
       }

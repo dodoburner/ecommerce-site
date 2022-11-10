@@ -35,11 +35,20 @@ class ProductPage extends Component {
   }
 
   updateSelectedAttribute(product, attribute, item) {
-    const attr = product.attributes.find(
-      (attr) => attr.name === attribute.name
-    );
-    attr.selected = item;
-    this.setState({ product });
+    // const attr = product.attributes.find(
+    //   (attr) => attr.name === attribute.name
+    // );
+    // attr.selected = item;
+    // this.setState({ product });
+    // this.setState((prevState) => {
+    //   const product = prevState.product;
+    //   const attr = product.attributes.find(
+    //     (attr) => attr.name === attribute.name
+    //   );
+    //   attr.selected = item;
+    //   return { product };
+    // });
+    // this.state.product.attributes[0].selected = item
   }
 
   updateImg(img) {
@@ -67,6 +76,7 @@ class ProductPage extends Component {
                     src={img}
                     alt={product.name}
                     onClick={() => this.updateImg(img)}
+                    key={img}
                   />
                 );
               })}
