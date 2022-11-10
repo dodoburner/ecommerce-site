@@ -38,7 +38,6 @@ class HeaderCart extends Component {
       handleOpenCart,
       incrementProductCount,
       decrementProductCount,
-      updateSelectedAttribute,
     } = this.props;
 
     return (
@@ -54,7 +53,6 @@ class HeaderCart extends Component {
                 state={{
                   ...this.props.state,
                   product,
-                  updateSelectedAttribute,
                 }}
               />
               <AddRemoveItemBtns

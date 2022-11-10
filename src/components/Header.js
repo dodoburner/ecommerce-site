@@ -53,7 +53,6 @@ class Header extends Component {
     const {
       incrementProductCount,
       decrementProductCount,
-      updateSelectedAttribute,
     } = this.props;
     const { currencyDropdownOpen } = this.state;
 
@@ -117,7 +116,6 @@ class Header extends Component {
                 state={this.props.state}
                 incrementProductCount={incrementProductCount}
                 decrementProductCount={decrementProductCount}
-                updateSelectedAttribute={updateSelectedAttribute}
                 handleOpenCart={this.handleOpenCart}
               />
             </div>

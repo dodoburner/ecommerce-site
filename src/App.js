@@ -50,8 +50,8 @@ export default class App extends Component {
       if (sameProduct) {
         product.attributes.forEach((attr, index) => {
           if (
-            attr.selected.displayValue !==
-            sameProduct.attributes[index].selected.displayValue
+            attr.selected.id !==
+            sameProduct.attributes[index].selected.id
           ) {
             isSame = false;
           }
@@ -125,7 +125,6 @@ export default class App extends Component {
                   updateCurrentCurrency={this.updateCurrentCurrency}
                   incrementProductCount={this.incrementProductCount}
                   decrementProductCount={this.decrementProductCount}
-                  updateSelectedAttribute={this.updateSelectedAttribute}
                 />
                 <Outlet />
               </div>
