@@ -3,6 +3,7 @@ import { client } from "..";
 import CartItem from "../components/CartItem";
 import withRouter from "../hoc/withRouter";
 import { getProduct } from "../getData";
+import _ from "lodash";
 class ProductPage extends Component {
   constructor(props) {
     super(props);
@@ -35,20 +36,13 @@ class ProductPage extends Component {
   }
 
   updateSelectedAttribute(product, attribute, item) {
-    // const attr = product.attributes.find(
-    //   (attr) => attr.name === attribute.name
-    // );
-    // attr.selected = item;
-    // this.setState({ product });
-    // this.setState((prevState) => {
-    //   const product = prevState.product;
-    //   const attr = product.attributes.find(
-    //     (attr) => attr.name === attribute.name
-    //   );
-    //   attr.selected = item;
-    //   return { product };
-    // });
-    // this.state.product.attributes[0].selected = item
+    this.setState(() => {
+      const attr = product.attributes.find(
+        (attr) => attr.name === attribute.name
+      );
+      attr.selected = item;
+      return { product };
+    });
   }
 
   updateImg(img) {
@@ -100,7 +94,7 @@ class ProductPage extends Component {
               </p>
 
               <button
-                onClick={() => addToCart(product)}
+                onClick={() => addToCart(_.cloneDeep(product))}
                 className="add-to-cart-btn"
               >
                 ADD TO CART

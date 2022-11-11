@@ -45,19 +45,16 @@ export default class App extends Component {
   addToCart(product) {
     this.setState((prevState) => {
       const sameProduct = prevState.cart.find((el) => {
-        let isSame = false
+        let isSame = false;
         if (el.id === product.id) {
-          isSame = true
+          isSame = true;
           product.attributes.forEach((attr, index) => {
-            if (
-              attr.selected.id !==
-              el.attributes[index].selected.id
-            ) {
+            if (attr.selected.id !== el.attributes[index].selected.id) {
               isSame = false;
             }
           });
         }
-        return isSame
+        return isSame;
       });
 
       if (sameProduct) {
