@@ -33,7 +33,7 @@ class HeaderCart extends Component {
   }
 
   render() {
-    const { cart, currentCurrency } = this.props.state;
+    const { cart, currentCurrency, cartCount} = this.props.state;
     const {
       handleOpenCart,
       incrementProductCount,
@@ -43,7 +43,7 @@ class HeaderCart extends Component {
     return (
       <div className="cart">
         <p className="cart-title">
-          My Bag, <span>{cart.length} items</span>
+          My Bag, <span>{cartCount} items</span>
         </p>
 
         {cart.map((product, index) => {
