@@ -13,6 +13,14 @@ class Header extends Component {
       cartOpen: false,
     };
   }
+  
+  componentDidUpdate() {
+    if (this.state.cartOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'scroll';
+    }
+  }
 
   handleOpenCart() {
     this.setState({ cartOpen: !this.state.cartOpen });
