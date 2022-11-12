@@ -393,7 +393,8 @@
   margin-bottom: 40px;
 }
 
-.description p {
+.description,
+.description * {
   font-weight: 400;
   font-size: 16px;
   line-height: 159.96%;
