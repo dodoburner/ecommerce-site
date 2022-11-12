@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Product from "../components/Product";
+import Product from "../components/ProdcutPLP";
 class Category extends Component {
   render() {
     const { currentCategory: category, currentCurrency } = this.props.state;

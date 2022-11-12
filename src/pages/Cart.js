@@ -1,7 +1,7 @@
 import { Component } from "react";
 import AddRemoveItemBtns from "../components/AddRemoveItemBtns";
 import CartImgGallery from "../components/CartImgGallery";
-import CartItem from "../components/CartItem";
+import CartItem from "../components/Product";
 import countTotal from "../utils/countTotal";
 class Cart extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class Cart extends Component {
 
         {cart.map((product, index) => {
           return (
-            <div className="cart-item-large" key={index}>
+            <div className="product-large" key={index}>
               <CartItem
                 state={{
                   ...this.props.state,

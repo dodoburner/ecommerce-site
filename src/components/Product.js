@@ -1,62 +1,56 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
-import emptyCart from "../assets/empty-cart-white.png";
-class Product extends Component {
+import AttributeItem from "./AttributeItem";
+
+export default class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isHovering: false,
-    };
+    this.getAttributeItems = this.getAttributeItems.bind(this);
   }
 
-  handleMouseOver = () => {
-    this.setState({ isHovering: true });
-  };
+  getAttributeItems(attribute) {
+    const { product } = this.props.state;
+    let items = attribute.items.map((item) => {
+      return (
+        <AttributeItem
+          key={item.displayValue}
+          state={{ ...this.props.state, product, item, attribute }}
+        />
+      );
+    });
 
-  handleMouseOut = () => {
-    this.setState({ isHovering: false });
-  };
-
-  handleClick = (product) => {
-    this.props.addToCart(product);
-  };
+    return items;
+  }
 
   render() {
-    const { product, currentCurrency } = this.props;
-    const { isHovering } = this.state;
+    const { product, currentCurrency } = this.props.state;
     const price = product.prices.find(
       (el) => el.currency.symbol === currentCurrency
     );
 
     return (
-      <div
-        className="product"
-        onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
-      >
-        {!product.inStock && <div className="out-of-stock">OUT OF STOCK</div>}
-        <Link
-          to={`${product.category}/${product.id}`}
-        >
-          <img className="product-img" src={product.gallery[0]} alt="product" />
+      <>
+        <div className="product-info">
+          <p className="product-brand">{product.brand}</p>
           <p className="product-name">{product.name}</p>
           <p className="product-price">
-            {price.currency.symbol}
+            {currentCurrency}
             {price.amount}
           </p>
-        </Link>
 
-        {isHovering && product.inStock && (
-          <div
-            className="product-cart"
-            onClick={() => this.handleClick(product)}
-          >
-            <img src={emptyCart} alt="empty cart" />
+          <div className="product-attributes-container">
+            {product.attributes.map((attribute) => {
+              const items = this.getAttributeItems(attribute);
+
+              return (
+                <div key={attribute.name} className="product-attribute">
+                  <p className="product-attribute-name">{attribute.name}:</p>
+                  <div className="product-attribute-items">{items}</div>
+                </div>
+              );
+            })}
           </div>
-        )}
-      </div>
+        </div>
+      </>
     );
   }
 }
-
-export default Product;

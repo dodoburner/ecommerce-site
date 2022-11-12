@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import "../styles/cart.css";
 import AddRemoveItemBtns from "./AddRemoveItemBtns";
-import CartItem from "./CartItem";
+import Product from "./Product";
 import countTotal from "../utils/countTotal";
 
 class HeaderCart extends Component {
@@ -25,12 +25,9 @@ class HeaderCart extends Component {
   }
 
   render() {
-    const { cart, currentCurrency, cartCount} = this.props.state;
-    const {
-      handleOpenCart,
-      incrementProductCount,
-      decrementProductCount,
-    } = this.props;
+    const { cart, currentCurrency, cartCount } = this.props.state;
+    const { handleOpenCart, incrementProductCount, decrementProductCount } =
+      this.props;
 
     return (
       <div className="cart">
@@ -40,8 +37,8 @@ class HeaderCart extends Component {
 
         {cart.map((product, index) => {
           return (
-            <div className="cart-item" key={index}>
-              <CartItem
+            <div className="product" key={index}>
+              <Product
                 state={{
                   ...this.props.state,
                   product,

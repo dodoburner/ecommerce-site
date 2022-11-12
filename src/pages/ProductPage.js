@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { client } from "..";
-import CartItem from "../components/CartItem";
+import Product from "../components/Product";
 import withRouter from "../hoc/withRouter";
 import { getProduct } from "../data";
 import _ from "lodash";
@@ -61,7 +61,7 @@ class ProductPage extends Component {
     return (
       <div className="product-page">
         {product ? (
-          <div className="cart-item-large">
+          <div className="product-large">
             <div className="product-page-imgs">
               {product.gallery.map((img) => {
                 return (
@@ -78,7 +78,7 @@ class ProductPage extends Component {
             <img className="product-page-img" src={img} alt={product.name} />
 
             <div>
-              <CartItem
+              <Product
                 state={{
                   ...this.props.state,
                   product,
@@ -88,7 +88,7 @@ class ProductPage extends Component {
               />
 
               <p className="product-page-price">PRICE:</p>
-              <p className="cart-item-price">
+              <p className="product-price">
                 {currentCurrency}
                 {price.amount}
               </p>
