@@ -5,10 +5,10 @@ import iconDown from "../assets/icon-down.png";
 import iconUp from "../assets/icon-up.png";
 import emptyCart from "../assets/empty-cart.png";
 import { Link } from "react-router-dom";
+import Nav from "./Nav";
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.handleCategoryClick = this.handleCategoryClick.bind(this);
     this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
     this.handleOpenCurrencyDropdown =
       this.handleOpenCurrencyDropdown.bind(this);
@@ -25,10 +25,6 @@ class Header extends Component {
 
   handleOpenCart() {
     this.setState({ cartOpen: !this.state.cartOpen });
-  }
-
-  handleCategoryClick(value) {
-    this.props.updateCurrentCategory(value);
   }
 
   handleCurrencyClick(value) {
@@ -53,28 +49,16 @@ class Header extends Component {
     const {
       incrementProductCount,
       decrementProductCount,
+      updateCurrentCategory,
     } = this.props;
     const { currencyDropdownOpen } = this.state;
 
     return (
       <header>
-        <ul className="category-list">
-          {categories.map((category) => {
-            const headerActive = currentCategory.name === category.name;
-            return (
-              <li
-                className={headerActive ? "header-active" : ""}
-                key={category.name}
-                onClick={() => this.handleCategoryClick(category)}
-              >
-                <Link to="/"> {category.name}</Link>
-                {headerActive ? (
-                  <div className="header-active-line"></div>
-                ) : null}
-              </li>
-            );
-          })}
-        </ul>
+        <Nav
+          state={{ categories, currentCategory }}
+          updateCurrentCategory={updateCurrentCategory}
+        />
 
         <Link to="/">
           <img className="logo" src={logo} alt="store logo" />
