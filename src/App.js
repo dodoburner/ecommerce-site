@@ -64,7 +64,7 @@ export default class App extends Component {
           cartCount: (prevState.cartCount += 1),
         };
       } else {
-        const cartProduct = { ...product, cartId: uuidv4() };
+        const cartProduct = { ...product, cartId: uuidv4(), count: 1 };
         return {
           cart: [...prevState.cart, cartProduct],
           cartCount: (prevState.cartCount += 1),

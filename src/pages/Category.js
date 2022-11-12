@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Product from "../components/ProdcutPLP";
+import ProductPLP from "../components/ProductPLP";
 class Category extends Component {
   render() {
     const { currentCategory: category, currentCurrency } = this.props.state;
@@ -15,10 +15,10 @@ class Category extends Component {
                 const attributes = product.attributes.map((attribute) => {
                   return { ...attribute, selected: attribute.items[0] };
                 });
-                product = { ...product, attributes, count: 1 };
+                product = { ...product, attributes };
 
                 return (
-                  <Product
+                  <ProductPLP
                     key={product.name}
                     product={product}
                     currentCurrency={currentCurrency}

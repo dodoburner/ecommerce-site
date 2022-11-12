@@ -27,7 +27,7 @@ class ProductPage extends Component {
         return { ...attribute, selected: attribute.items[0] };
       });
       this.setState({
-        product: { ...product, attributes, count: 1 },
+        product: { ...product, attributes },
         img: product.gallery[0],
       });
     };
