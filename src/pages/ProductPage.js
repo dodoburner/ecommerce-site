@@ -2,7 +2,7 @@ import { Component } from "react";
 import { client } from "..";
 import CartItem from "../components/CartItem";
 import withRouter from "../hoc/withRouter";
-import { getProduct } from "../getData";
+import { getProduct } from "../data";
 import _ from "lodash";
 class ProductPage extends Component {
   constructor(props) {

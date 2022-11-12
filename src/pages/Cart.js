@@ -2,33 +2,24 @@ import { Component } from "react";
 import AddRemoveItemBtns from "../components/AddRemoveItemBtns";
 import CartImgGallery from "../components/CartImgGallery";
 import CartItem from "../components/CartItem";
+import countTotal from "../utils/countTotal";
 class Cart extends Component {
-  // Find way to move this from both carts to top level to follow DRY
   constructor(props) {
     super(props);
     this.state = {
-      total: this.countTotal(),
+      total: countTotal(
+        this.props.state.cart,
+        this.props.state.currentCurrency
+      ),
     };
   }
 
   componentDidUpdate(prevProps) {
-    const prevCart = prevProps.state;
-    const cart = this.props.state;
-    if (prevCart !== cart) {
-      this.setState({ total: this.countTotal() });
-    }
-  }
-
-  countTotal() {
-    let total = 0;
+    const { cart: prevCart } = prevProps.state;
     const { cart, currentCurrency } = this.props.state;
-    cart.forEach((product) => {
-      const price = product.prices.find(
-        (el) => el.currency.symbol === currentCurrency
-      );
-      total += price.amount * product.count;
-    });
-    return total.toFixed(2);
+    if (prevCart !== cart) {
+      this.setState({ total: countTotal(cart, currentCurrency) });
+    }
   }
 
   render() {
@@ -52,11 +43,15 @@ class Cart extends Component {
                   ...this.props.state,
                   product,
                   updateSelectedAttribute,
-                  isLarge: true
+                  isLarge: true,
                 }}
               />
               <AddRemoveItemBtns
-                state={{product, incrementProductCount, decrementProductCount}}
+                state={{
+                  product,
+                  incrementProductCount,
+                  decrementProductCount,
+                }}
               />
               <CartImgGallery product={product} />
             </div>

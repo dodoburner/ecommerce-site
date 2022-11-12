@@ -3,33 +3,25 @@ import { Link } from "react-router-dom";
 import "../styles/cart.css";
 import AddRemoveItemBtns from "./AddRemoveItemBtns";
 import CartItem from "./CartItem";
+import countTotal from "../utils/countTotal";
 
 class HeaderCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      total: this.countTotal(),
+      total: countTotal(
+        this.props.state.cart,
+        this.props.state.currentCurrency
+      ),
     };
   }
 
   componentDidUpdate(prevProps) {
-    const prevCart = prevProps.state;
-    const cart = this.props.state;
-    if (prevCart !== cart) {
-      this.setState({ total: this.countTotal() });
-    }
-  }
-
-  countTotal() {
-    let total = 0;
+    const { cart: prevCart } = prevProps.state;
     const { cart, currentCurrency } = this.props.state;
-    cart.forEach((product) => {
-      const price = product.prices.find(
-        (el) => el.currency.symbol === currentCurrency
-      );
-      total += price.amount * product.count;
-    });
-    return total.toFixed(2);
+    if (prevCart !== cart) {
+      this.setState({ total: countTotal(cart, currentCurrency) });
+    }
   }
 
   render() {

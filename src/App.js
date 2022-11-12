@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Category from "./pages/Category";
 import Cart from "./pages/Cart";
 import ProductPage from "./pages/ProductPage";
-import getData from "./getData";
+import getData from "./data";
 export default class App extends Component {
   constructor() {
     super();
@@ -79,7 +79,10 @@ export default class App extends Component {
         (product) => cartId === product.cartId
       );
       product.count += 1;
-      return { cart: prevState.cart, cartCount: (prevState.cartCount += 1) };
+      return {
+        cart: [...prevState.cart],
+        cartCount: (prevState.cartCount += 1),
+      };
     });
   }
 
@@ -111,6 +114,9 @@ export default class App extends Component {
   }
 
   render() {
+    // const categories = this.state
+    // if (categories.length === 0) return <p>Loading...</p>
+
     return (
       <div className="App">
         <Routes>
