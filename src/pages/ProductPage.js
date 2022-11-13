@@ -5,6 +5,7 @@ import { getProduct } from "../data";
 import Product from "../components/Product";
 import withRouter from "../hoc/withRouter";
 import _ from "lodash";
+import parse from "html-react-parser";
 class ProductPage extends Component {
   constructor(props) {
     super(props);
@@ -93,13 +94,11 @@ class ProductPage extends Component {
                   updateSelectedAttribute,
                 }}
               />
-
               <p className="product-page-price">PRICE:</p>
               <p className="product-price">
                 {currentCurrency}
                 {price.amount}
               </p>
-
               {product.inStock ? (
                 <button
                   onClick={() => addToCart(_.cloneDeep(product))}
@@ -113,10 +112,7 @@ class ProductPage extends Component {
                 </button>
               )}
 
-              <div
-                className="description"
-                dangerouslySetInnerHTML={{ __html: product.description }}
-              />
+              <div className="description"> {parse(product.description)} </div>
             </div>
           </div>
         ) : null}

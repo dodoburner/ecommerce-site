@@ -414,9 +414,13 @@
 }
 
 .description,
-.description * {
+.description p {
   font-weight: 400;
   font-size: 16px;
   line-height: 159.96%;
   font-family: 'Roboto', sans-serif;
+}
+
+.description p {
+  margin: 12px 0;
 }
