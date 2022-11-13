@@ -43,7 +43,7 @@ export default class ProductPLP extends Component {
             src={product.gallery[0]}
             alt="product"
           />
-          <p className="plp-product-name">{product.name}</p>
+          <p className="plp-product-name">{product.brand} {product.name}</p>
           <p className="plp-product-price">
             {price.currency.symbol}
             {price.amount}
