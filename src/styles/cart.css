@@ -341,6 +341,10 @@
   border-bottom: none;
 }
 
+.product-page-img-container {
+  position: relative;
+}
+
 .product-page .product-name {
   margin-bottom: 43px;
 }
@@ -359,11 +363,16 @@
   row-gap: 50px;
 }
 
-.product-page-img {
+.product-page-img-container {
   height: 511px;
   width: 610px;
   margin-left: 40px;
   margin-right: 100px;
+}
+
+.product-page-img {
+  height: 511px;
+  width: 610px;
 }
 
 .product-page-img-small {
@@ -394,6 +403,11 @@
   font-size: 16px;
   line-height: 120%;
   margin-bottom: 40px;
+}
+
+.out-of-stock-btn {
+  cursor: initial;
+  opacity: 0.5;
 }
 
 .description,

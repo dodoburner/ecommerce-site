@@ -75,7 +75,13 @@ class ProductPage extends Component {
                 );
               })}
             </div>
-            <img className="product-page-img" src={img} alt={product.name} />
+
+            <div className="product-page-img-container">
+              {!product.inStock && (
+                <div className="out-of-stock">OUT OF STOCK</div>
+              )}
+              <img className="product-page-img" src={img} alt={product.name} />
+            </div>
 
             <div>
               <Product
@@ -93,12 +99,18 @@ class ProductPage extends Component {
                 {price.amount}
               </p>
 
-              <button
-                onClick={() => addToCart(_.cloneDeep(product))}
-                className="add-to-cart-btn"
-              >
-                ADD TO CART
-              </button>
+              {product.inStock ? (
+                <button
+                  onClick={() => addToCart(_.cloneDeep(product))}
+                  className="add-to-cart-btn"
+                >
+                  ADD TO CART
+                </button>
+              ) : (
+                <button className="add-to-cart-btn out-of-stock-btn">
+                  ADD TO CART
+                </button>
+              )}
 
               <div
                 className="description"
