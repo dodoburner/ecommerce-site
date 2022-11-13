@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { client } from ".";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Header from "./components/Header";
 import Category from "./pages/Category";
@@ -114,52 +114,38 @@ export default class App extends Component {
   }
 
   render() {
-    // const categories = this.state
-    // if (categories.length === 0) return <p>Loading...</p>
-
     return (
       <div className="App">
+        <Header
+          state={this.state}
+          updateCurrentCategory={this.updateCurrentCategory}
+          updateCurrentCurrency={this.updateCurrentCurrency}
+          incrementProductCount={this.incrementProductCount}
+          decrementProductCount={this.decrementProductCount}
+        />
         <Routes>
           <Route
-            path="/"
+            path='/'
+            element={<Category state={this.state} addToCart={this.addToCart} />}
+          />
+          <Route
+            path="/cart"
             element={
-              <div>
-                <Header
-                  state={this.state}
-                  updateCurrentCategory={this.updateCurrentCategory}
-                  updateCurrentCurrency={this.updateCurrentCurrency}
-                  incrementProductCount={this.incrementProductCount}
-                  decrementProductCount={this.decrementProductCount}
-                />
-                <Outlet />
-              </div>
+              <Cart
+                state={this.state}
+                addToCart={this.addToCart}
+                incrementProductCount={this.incrementProductCount}
+                decrementProductCount={this.decrementProductCount}
+                updateSelectedAttribute={this.updateSelectedAttribute}
+              />
             }
-          >
-            <Route
-              index
-              element={
-                <Category state={this.state} addToCart={this.addToCart} />
-              }
-            />
-            <Route
-              path="/cart"
-              element={
-                <Cart
-                  state={this.state}
-                  addToCart={this.addToCart}
-                  incrementProductCount={this.incrementProductCount}
-                  decrementProductCount={this.decrementProductCount}
-                  updateSelectedAttribute={this.updateSelectedAttribute}
-                />
-              }
-            />
-            <Route
-              path="/:category/:id"
-              element={
-                <ProductPage state={this.state} addToCart={this.addToCart} />
-              }
-            />
-          </Route>
+          />
+          <Route
+            path="/:category/:id"
+            element={
+              <ProductPage state={this.state} addToCart={this.addToCart} />
+            }
+          />
         </Routes>
       </div>
     );
