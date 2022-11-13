@@ -30,7 +30,7 @@ export default class CartImgGallery extends Component {
     return (
       <div className="img-container">
         <div
-          className="left-sign"
+          className={`left-sign ${imgIndex === 0 ? 'hidden' : ''}`}
           onClick={() => this.updateImgIndex("decrement")}
         >
           <img src={iconLeft} alt="previous" />
@@ -41,7 +41,7 @@ export default class CartImgGallery extends Component {
           alt={product.name}
         />
         <div
-          className="right-sign"
+          className={`right-sign ${imgIndex === product.gallery.length - 1 ? 'hidden' : ''}`}
           onClick={() => this.updateImgIndex("increment")}
         >
           <img src={iconRight} alt="next" />
