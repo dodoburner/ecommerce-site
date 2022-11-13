@@ -12,6 +12,8 @@ export default class CurrencyMenu extends Component {
     this.state = {
       currencyMenuOpen: false,
     };
+    this.wrapperRef = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   handleCurrencyClick(value) {
@@ -34,6 +36,25 @@ export default class CurrencyMenu extends Component {
     });
   }
 
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  handleClickOutside(event) {
+    const { currencyMenuOpen } = this.state;
+    if (
+      currencyMenuOpen &&
+      this.wrapperRef &&
+      !this.wrapperRef.current.contains(event.target)
+    ) {
+      this.setState({ currencyMenuOpen: false });
+    }
+  }
+
   render() {
     const { currentCurrency, currentCategory } = this.props.state;
     const { currencyMenuOpen } = this.state;
@@ -43,7 +64,7 @@ export default class CurrencyMenu extends Component {
         {currentCurrency}
         <img src={currencyMenuOpen ? iconUp : iconDown} alt="icon-down" />
 
-        <ul className="currency-dropdown">
+        <ul className="currency-dropdown" ref={this.wrapperRef}>
           {"products" in currentCategory &&
             currencyMenuOpen &&
             this.renderCurrencies()}
