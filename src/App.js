@@ -25,12 +25,25 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    const cartCount = JSON.parse(localStorage.getItem("cartCount"));
+    if (cart) {
+      this.setState({ cart, cartCount });
+    }
+
     const fetchData = async () => {
       const response = await client.query({ query: getData });
       const categories = response.data.categories;
-      this.setState({ categories: categories, currentCategory: categories[0] });
+      this.setState({ categories, currentCategory: categories[0] });
     };
     fetchData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.cart !== this.state.cart) {
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
+      localStorage.setItem("cartCount", this.state.cartCount);
+    }
   }
 
   updateCurrentCategory(value) {
