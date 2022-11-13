@@ -1,6 +1,7 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import ProductPLP from "../components/ProductPLP";
-class Category extends Component {
+export default class Category extends Component {
   render() {
     const { currentCategory: category, currentCurrency } = this.props.state;
     const { addToCart } = this.props;
@@ -34,4 +35,10 @@ class Category extends Component {
   }
 }
 
-export default Category;
+Category.propTypes = {
+  state: PropTypes.shape({
+    currentCategory: PropTypes.object,
+    currentCurrency: PropTypes.string,
+  }),
+  addToCart: PropTypes.func,
+};

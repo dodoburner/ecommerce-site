@@ -1,8 +1,9 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import iconDown from "../assets/icon-down.png";
 import iconUp from "../assets/icon-up.png";
 
-class CurrencyMenu extends Component {
+export default class CurrencyMenu extends Component {
   constructor(props) {
     super(props);
     this.renderCurrencies = this.renderCurrencies.bind(this);
@@ -52,4 +53,10 @@ class CurrencyMenu extends Component {
   }
 }
 
-export default CurrencyMenu;
+CurrencyMenu.propTypes = {
+  state: PropTypes.shape({
+    currentCategory: PropTypes.object,
+    currentCurrency: PropTypes.string,
+  }),
+  updateCurrentCurrency: PropTypes.func,
+};

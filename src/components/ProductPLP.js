@@ -1,7 +1,8 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import emptyCart from "../assets/empty-cart-white.png";
-class ProductPLP extends Component {
+export default class ProductPLP extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,4 +63,8 @@ class ProductPLP extends Component {
   }
 }
 
-export default ProductPLP;
+ProductPLP.propTypes = {
+  addToCart: PropTypes.func,
+  product: PropTypes.object,
+  currentCurrency: PropTypes.string,
+};

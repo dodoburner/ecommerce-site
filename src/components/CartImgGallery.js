@@ -1,4 +1,5 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import iconLeft from "../assets/icon-left.png";
 import iconRight from "../assets/icon-right.png";
 
@@ -49,3 +50,7 @@ export default class CartImgGallery extends Component {
     );
   }
 }
+
+CartImgGallery.propTypes = {
+  product: PropTypes.object,
+};

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { client } from ".";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";

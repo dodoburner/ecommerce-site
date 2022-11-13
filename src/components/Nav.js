@@ -1,7 +1,8 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-class Nav extends Component {
+export default class Nav extends Component {
   constructor(props) {
     super(props);
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
@@ -34,4 +35,10 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+Nav.propTypes = {
+  state: PropTypes.shape({
+    categories: PropTypes.array,
+    currentCategory: PropTypes.object,
+  }),
+  updateCurrentCategory: PropTypes.func,
+};

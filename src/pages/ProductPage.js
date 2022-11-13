@@ -1,8 +1,9 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { client } from "..";
+import PropTypes from "prop-types";
+import { getProduct } from "../data";
 import Product from "../components/Product";
 import withRouter from "../hoc/withRouter";
-import { getProduct } from "../data";
 import _ from "lodash";
 class ProductPage extends Component {
   constructor(props) {
@@ -124,4 +125,13 @@ class ProductPage extends Component {
   }
 }
 
+ProductPage.propTypes = {
+  params: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+  state: PropTypes.shape({
+    currentCurrency: PropTypes.string,
+  }),
+  addToCart: PropTypes.func,
+};
 export default withRouter(ProductPage);

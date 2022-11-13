@@ -1,9 +1,10 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import AddRemoveItemBtns from "../components/AddRemoveItemBtns";
 import CartImgGallery from "../components/CartImgGallery";
 import CartItem from "../components/Product";
 import countTotal from "../utils/countTotal";
-class Cart extends Component {
+export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,4 +84,13 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+Cart.propTypes = {
+  state: PropTypes.shape({
+    cart: PropTypes.array,
+    currentCurrency: PropTypes.string,
+    cartCount: PropTypes.number,
+  }),
+  incrementProductCount: PropTypes.func,
+  decrementProductCount: PropTypes.func,
+  updateSelectedAttribute: PropTypes.func,
+};

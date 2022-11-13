@@ -1,11 +1,12 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import "../styles/cart.css";
 import AddRemoveItemBtns from "./AddRemoveItemBtns";
 import Product from "./Product";
 import countTotal from "../utils/countTotal";
 
-class HeaderCart extends Component {
+export default class HeaderCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,4 +76,13 @@ class HeaderCart extends Component {
   }
 }
 
-export default HeaderCart;
+HeaderCart.propTypes = {
+  state: PropTypes.shape({
+    cart: PropTypes.array,
+    currentCurrency: PropTypes.string,
+    cartCount: PropTypes.number,
+  }),
+  handleOpenCart: PropTypes.func,
+  incrementProductCount: PropTypes.func,
+  decrementProductCount: PropTypes.func,
+};

@@ -1,4 +1,5 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import AttributeItem from "./AttributeItem";
 
 export default class Product extends Component {
@@ -54,3 +55,10 @@ export default class Product extends Component {
     );
   }
 }
+
+Product.propTypes = {
+  state: PropTypes.shape({
+    product: PropTypes.object,
+    currentCurrency: PropTypes.string,
+  }),
+};

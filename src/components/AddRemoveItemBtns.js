@@ -1,8 +1,10 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class AddRemoveItemBtns extends Component {
   render() {
-    const { incrementProductCount, decrementProductCount, product } = this.props.state;
+    const { incrementProductCount, decrementProductCount, product } =
+      this.props.state;
 
     return (
       <div className="product-amount">
@@ -13,3 +15,11 @@ export default class AddRemoveItemBtns extends Component {
     );
   }
 }
+
+AddRemoveItemBtns.propTypes = {
+  state: PropTypes.shape({
+    incrementProductCount: PropTypes.func,
+    decrementProductCount: PropTypes.func,
+    product: PropTypes.object,
+  }),
+};

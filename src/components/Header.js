@@ -1,11 +1,13 @@
-import { Component } from "react";
-import HeaderCart from "./HeaderCart";
-import logo from "../assets/a-logo.png";
-import emptyCart from "../assets/empty-cart.png";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import logo from "../assets/a-logo.png";
+import HeaderCart from "./HeaderCart";
+import emptyCart from "../assets/empty-cart.png";
 import Nav from "./Nav";
 import CurrencyMenu from "./CurrencyMenu";
-class Header extends Component {
+
+export default class Header extends Component {
   constructor(props) {
     super(props);
     this.handleOpenCart = this.handleOpenCart.bind(this);
@@ -13,12 +15,12 @@ class Header extends Component {
       cartOpen: false,
     };
   }
-  
+
   componentDidUpdate() {
     if (this.state.cartOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'scroll';
+      document.body.style.overflow = "scroll";
     }
   }
 
@@ -82,4 +84,15 @@ class Header extends Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  state: PropTypes.shape({
+    categories: PropTypes.array,
+    currentCategory: PropTypes.object,
+    currentCurrency: PropTypes.string,
+    cartCount: PropTypes.number,
+  }),
+  incrementProductCount: PropTypes.func,
+  decrementProductCount: PropTypes.func,
+  updateCurrentCategory: PropTypes.func,
+  updateCurrentCurrency: PropTypes.func,
+};
