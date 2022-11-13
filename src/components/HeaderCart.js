@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import "../styles/cart.css";
 import AddRemoveItemBtns from "./AddRemoveItemBtns";
 import Product from "./Product";
 import countTotal from "../utils/countTotal";

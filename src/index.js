@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./styles/general.css";
+import "./styles/header.css";
+import "./styles/carts.css";
+import "./styles/PLP.css";
+import "./styles/PDP.css";
+
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
