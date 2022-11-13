@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export default class AttributeItem extends Component {
   render() {
-    const { isLarge, updateSelectedAttribute, product, attribute, item } =
+    const { isOnProductPage, updateSelectedAttribute, product, attribute, item } =
       this.props.state;
     const selectedAttr = attribute.selected;
     const isSelected =
@@ -13,7 +13,7 @@ export default class AttributeItem extends Component {
       <div
         className={`item-text ${isSelected ? "item-text-selected" : ""}`}
         onClick={
-          isLarge
+          isOnProductPage
             ? () => {
                 updateSelectedAttribute(product, attribute, item);
               }
@@ -26,7 +26,7 @@ export default class AttributeItem extends Component {
       <div
         className={`item-swatch ${isSelected ? "item-swatch-selected" : ""}`}
         onClick={
-          isLarge
+          isOnProductPage
             ? () => {
                 updateSelectedAttribute(product, attribute, item);
               }
@@ -41,7 +41,7 @@ export default class AttributeItem extends Component {
 
 AttributeItem.propTypes = {
   state: PropTypes.shape({
-    isLarge: PropTypes.bool,
+    isOnProductPage: PropTypes.bool,
     updateSelectedAttribute: PropTypes.func,
     product: PropTypes.object,
     attribute: PropTypes.object,

@@ -21,7 +21,6 @@ export default class App extends Component {
     this.updateCurrentCurrency = this.updateCurrentCurrency.bind(this);
     this.incrementProductCount = this.incrementProductCount.bind(this);
     this.decrementProductCount = this.decrementProductCount.bind(this);
-    this.updateSelectedAttribute = this.updateSelectedAttribute.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
 
@@ -104,15 +103,6 @@ export default class App extends Component {
     });
   }
 
-  updateSelectedAttribute(product, attribute, item) {
-    this.setState((prevState) => {
-      const prod = prevState.cart.find((el) => el.cartId === product.cartId);
-      const attr = prod.attributes.find((attr) => attr.name === attribute.name);
-      attr.selected = item;
-      return { cart: [...prevState.cart] };
-    });
-  }
-
   render() {
     return (
       <div className="App">
@@ -125,7 +115,7 @@ export default class App extends Component {
         />
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={<Category state={this.state} addToCart={this.addToCart} />}
           />
           <Route
@@ -136,7 +126,6 @@ export default class App extends Component {
                 addToCart={this.addToCart}
                 incrementProductCount={this.incrementProductCount}
                 decrementProductCount={this.decrementProductCount}
-                updateSelectedAttribute={this.updateSelectedAttribute}
               />
             }
           />

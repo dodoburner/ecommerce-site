@@ -89,7 +89,7 @@ class ProductPage extends Component {
                 state={{
                   ...this.props.state,
                   product,
-                  isLarge: true,
+                  isOnProductPage: true,
                   updateSelectedAttribute,
                 }}
               />

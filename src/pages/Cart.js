@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AddRemoveItemBtns from "../components/AddRemoveItemBtns";
 import CartImgGallery from "../components/CartImgGallery";
-import CartItem from "../components/Product";
+import Product from "../components/Product";
 import countTotal from "../utils/countTotal";
 export default class Cart extends Component {
   constructor(props) {
@@ -28,7 +28,6 @@ export default class Cart extends Component {
     const {
       incrementProductCount,
       decrementProductCount,
-      updateSelectedAttribute,
     } = this.props;
     const tax = (this.state.total / 21).toFixed(2);
 
@@ -39,12 +38,10 @@ export default class Cart extends Component {
         {cart.map((product, index) => {
           return (
             <div className="product-large" key={index}>
-              <CartItem
+              <Product
                 state={{
                   ...this.props.state,
                   product,
-                  updateSelectedAttribute,
-                  isLarge: true,
                 }}
               />
               <AddRemoveItemBtns
@@ -92,5 +89,4 @@ Cart.propTypes = {
   }),
   incrementProductCount: PropTypes.func,
   decrementProductCount: PropTypes.func,
-  updateSelectedAttribute: PropTypes.func,
 };
