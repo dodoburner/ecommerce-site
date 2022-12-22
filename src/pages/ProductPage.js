@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { client } from "..";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getProduct } from "../data";
 import Product from "../components/Product";
 import withRouter from "../hoc/withRouter";
 import _ from "lodash";
 import parse from "html-react-parser";
+import { addToCart } from "../redux/cartReducer";
+
 class ProductPage extends Component {
   constructor(props) {
     super(props);
@@ -130,4 +133,9 @@ ProductPage.propTypes = {
   }),
   addToCart: PropTypes.func,
 };
-export default withRouter(ProductPage);
+
+const mapDispatchToProps = {
+  addToCart,
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(ProductPage));
