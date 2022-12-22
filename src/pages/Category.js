@@ -16,7 +16,7 @@ class Category extends Component {
   fetchData = async () => {
     const response = await client.query({
       query: getCategory,
-      variables: { title: this.props.params.category },
+      variables: { title: this.props.params.categoryId },
     });
     const category = response.data.category;
     this.setState({ category });
@@ -27,7 +27,7 @@ class Category extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.params.category !== this.state.category.name) {
+    if (this.props.params.categoryId !== this.state.category.name) {
       this.fetchData();
     }
   }
@@ -66,7 +66,7 @@ class Category extends Component {
 
 Category.propTypes = {
   params: PropTypes.shape({
-    category: PropTypes.string,
+    categoryId: PropTypes.string,
   }),
   addToCart: PropTypes.func,
   currentCurrency: PropTypes.string,

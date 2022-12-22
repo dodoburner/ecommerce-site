@@ -75,7 +75,7 @@ export default class App extends Component {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/:category" element={<Category state={this.state} />} />
+          <Route path="category/:categoryId" element={<Category state={this.state} />} />
           <Route
             path="/cart"
             element={
@@ -87,7 +87,7 @@ export default class App extends Component {
             }
           />
           <Route
-            path="/:category/:id"
+            path="category/:categoryId/products/:id"
             element={<ProductPage state={this.state} />}
           />
         </Routes>

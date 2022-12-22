@@ -6,19 +6,19 @@ import withRouter from "../hoc/withRouter";
 class Nav extends Component {
   render() {
     const categories = ["all", "clothes", "tech"];
-    const currentCategory = this.props.location.pathname;
+    const location = this.props.location;
 
     return (
       <ul className="category-list">
         {categories.map((category) => {
-          const headerActive = currentCategory === `/${category}`;
+          const headerActive = location.pathname.includes(category);
           return (
             <li
               className={headerActive ? "header-active" : ""}
               key={category}
               onClick={() => this.handleCategoryClick(category)}
             >
-              <Link to={category}> {category}</Link>
+              <Link to={`category/${category}`}> {category}</Link>
               {headerActive ? <div className="header-active-line"></div> : null}
             </li>
           );
