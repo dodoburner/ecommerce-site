@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import logo from "../assets/a-logo.png";
-import HeaderCart from "./HeaderCart";
-import emptyCart from "../assets/empty-cart.png";
+// import HeaderCart from "./HeaderCart";
+// import emptyCart from "../assets/empty-cart.png";
+// import CurrencyMenu from "./CurrencyMenu";
 import Nav from "./Nav";
-import CurrencyMenu from "./CurrencyMenu";
 
 export default class Header extends Component {
   constructor(props) {
@@ -29,27 +29,24 @@ export default class Header extends Component {
   }
 
   render() {
-    const { categories, currentCategory, currentCurrency, cartCount } =
-      this.props.state;
-    const {
-      incrementProductCount,
-      decrementProductCount,
-      updateCurrentCategory,
-      updateCurrentCurrency,
-    } = this.props;
+    // const { categories, currentCategory, currentCurrency, cartCount } =
+    //   this.props.state;
+    // const {
+    //   incrementProductCount,
+    //   decrementProductCount,
+    //   updateCurrentCategory,
+    //   updateCurrentCurrency,
+    // } = this.props;
 
     return (
       <header>
-        <Nav
-          state={{ categories, currentCategory }}
-          updateCurrentCategory={updateCurrentCategory}
-        />
+        <Nav />
 
         <Link to="/">
           <img className="logo" src={logo} alt="store logo" />
         </Link>
 
-        <div className="currency-cart-container">
+        {/* <div className="currency-cart-container">
           <CurrencyMenu
             state={{ currentCurrency, currentCategory }}
             updateCurrentCurrency={updateCurrentCurrency}
@@ -78,7 +75,7 @@ export default class Header extends Component {
               />
             </div>
           )}
-        </div>
+        </div> */}
       </header>
     );
   }
