@@ -1,24 +1,24 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Category from "./pages/Category";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
-export default class App extends Component {
-  // componentDidMount() {
-  //   const cart = JSON.parse(localStorage.getItem("cart"));
-  //   const cartCount = JSON.parse(localStorage.getItem("cartCount"));
-  //   if (cart) {
-  //     this.setState({ cart, cartCount });
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.cart !== this.state.cart) {
-  //     localStorage.setItem("cart", JSON.stringify(this.state.cart));
-  //     localStorage.setItem("cartCount", this.state.cartCount);
-  //   }
-  // }
+import { connect } from "react-redux";
+class App extends Component {
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartItems !== this.props.cartItems) {
+      localStorage.setItem("cartItems", JSON.stringify(this.props.cartItems));
+      localStorage.setItem("cartCount", this.props.cartCount);
+    }
+    if (prevProps.currentCurrency !== this.props.currentCurrency) {
+      localStorage.setItem(
+        "currentCurrency",
+        JSON.stringify(this.props.currentCurrency)
+      );
+    }
+  }
 
   render() {
     return (
@@ -36,3 +36,17 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  cartItems: PropTypes.array,
+  currentCurrency: PropTypes.string,
+  cartCount: PropTypes.number,
+};
+
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.items,
+  cartCount: state.cart.count,
+  currentCurrency: state.cart.currentCurrency,
+});
+
+export default connect(mapStateToProps, null)(App);

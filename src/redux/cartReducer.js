@@ -1,9 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
+let initialState = { items: [], count: 0, currentCurrency: "$" };
+const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+const cartCount = JSON.parse(localStorage.getItem("cartCount"));
+const currentCurrency = JSON.parse(localStorage.getItem("currentCurrency"));
+
+if (cartItems) {
+  initialState.items = cartItems;
+  initialState.count = cartCount;
+}
+if (currentCurrency) {
+  initialState.currentCurrency = currentCurrency;
+}
+
 export const cartSlice = createSlice({
   name: "cart",
-  initialState: { items: [], count: 0, currentCurrency: "$" },
+  initialState,
   reducers: {
     addToCart: (state, action) => {
       const product = action.payload;
@@ -22,12 +35,11 @@ export const cartSlice = createSlice({
 
       if (sameProduct) {
         sameProduct.count += 1;
-        state.count += 1;
       } else {
         const cartProduct = { ...product, cartId: uuidv4(), count: 1 };
         state.items = [...state.items, cartProduct];
-        state.count += 1;
       }
+      state.count += 1;
     },
     updateCurrentCurrency: (state, action) => {
       state.currentCurrency = action.payload;
