@@ -6,8 +6,9 @@ import HeaderCart from "./HeaderCart";
 import emptyCart from "../assets/empty-cart.png";
 import CurrencyMenu from "./CurrencyMenu";
 import Nav from "./Nav";
+import { connect } from "react-redux";
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.handleOpenCart = this.handleOpenCart.bind(this);
@@ -29,34 +30,24 @@ export default class Header extends Component {
   }
 
   render() {
-    // const { categories, currentCategory, currentCurrency, cartCount } =
-    //   this.props.state;
-    // const {
-    //   incrementProductCount,
-    //   decrementProductCount,
-    //   updateCurrentCategory,
-    //   updateCurrentCurrency,
-    // } = this.props;
+    const { cartCount } = this.props;
 
     return (
       <header>
         <Nav />
 
-        <Link to="/">
+        <Link to="/category/all">
           <img className="logo" src={logo} alt="store logo" />
         </Link>
 
         <div className="currency-cart-container">
-          <CurrencyMenu
-            // state={{ currentCurrency, currentCategory }}
-            // updateCurrentCurrency={updateCurrentCurrency}
-          />
+          <CurrencyMenu />
 
           <div className="cart-img-container" onClick={this.handleOpenCart}>
             <img className="cart-img" src={emptyCart} alt="cart" />
-            {/* {cartCount > 0 ? (
+            {cartCount > 0 ? (
               <div className="cart-count">{cartCount}</div>
-            ) : null} */}
+            ) : null}
           </div>
 
           {this.state.cartOpen && (
@@ -68,7 +59,7 @@ export default class Header extends Component {
               }}
             >
               <HeaderCart
-                state={this.props.state}
+                // state={this.props.state}
                 // incrementProductCount={incrementProductCount}
                 // decrementProductCount={decrementProductCount}
                 handleOpenCart={this.handleOpenCart}
@@ -82,14 +73,21 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  state: PropTypes.shape({
-    categories: PropTypes.array,
-    currentCategory: PropTypes.object,
-    currentCurrency: PropTypes.string,
-    cartCount: PropTypes.number,
-  }),
-  incrementProductCount: PropTypes.func,
-  decrementProductCount: PropTypes.func,
-  updateCurrentCategory: PropTypes.func,
-  updateCurrentCurrency: PropTypes.func,
+  // state: PropTypes.shape({
+  //   categories: PropTypes.array,
+  //   currentCategory: PropTypes.object,
+  //   currentCurrency: PropTypes.string,
+  //   cartCount: PropTypes.number,
+  // }),
+  // incrementProductCount: PropTypes.func,
+  // decrementProductCount: PropTypes.func,
+  // updateCurrentCategory: PropTypes.func,
+  // updateCurrentCurrency: PropTypes.func,
+  cartCount: PropTypes.number,
 };
+
+const mapStateToProps = (state) => ({
+  cartCount: state.cart.count,
+});
+
+export default connect(mapStateToProps, null)(Header);

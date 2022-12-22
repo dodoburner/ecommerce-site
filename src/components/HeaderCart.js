@@ -4,30 +4,26 @@ import PropTypes from "prop-types";
 import AddRemoveItemBtns from "./AddRemoveItemBtns";
 import Product from "./Product";
 import countTotal from "../utils/countTotal";
+import { connect } from "react-redux";
 
-export default class HeaderCart extends Component {
+class HeaderCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      total: countTotal(
-        this.props.state.cart,
-        this.props.state.currentCurrency
-      ),
+      total: countTotal(this.props.items, this.props.currentCurrency),
     };
   }
 
   componentDidUpdate(prevProps) {
-    const { cart: prevCart } = prevProps.state;
-    const { cart, currentCurrency } = this.props.state;
-    if (prevCart !== cart) {
-      this.setState({ total: countTotal(cart, currentCurrency) });
+    const { items: prevItems } = prevProps;
+    const { items, currentCurrency } = this.props;
+    if (prevItems !== items) {
+      this.setState({ total: countTotal(items, currentCurrency) });
     }
   }
 
   render() {
-    const { cart, currentCurrency, cartCount } = this.props.state;
-    const { handleOpenCart, incrementProductCount, decrementProductCount } =
-      this.props;
+    const { items, currentCurrency, cartCount, handleOpenCart } = this.props;
 
     return (
       <div className="cart">
@@ -35,20 +31,20 @@ export default class HeaderCart extends Component {
           My Bag, <span>{cartCount} items</span>
         </p>
 
-        {cart.map((product, index) => {
+        {items.map((product, index) => {
           return (
             <div className="product" key={index}>
               <Product
                 state={{
-                  ...this.props.state,
+                  // ...this.props.state,
                   product,
                 }}
               />
               <AddRemoveItemBtns
                 state={{
                   product,
-                  incrementProductCount,
-                  decrementProductCount,
+                  // incrementProductCount,
+                  // decrementProductCount,
                 }}
               />
               <img src={product.gallery[0]} alt={product.name} />
@@ -76,12 +72,16 @@ export default class HeaderCart extends Component {
 }
 
 HeaderCart.propTypes = {
-  state: PropTypes.shape({
-    cart: PropTypes.array,
-    currentCurrency: PropTypes.string,
-    cartCount: PropTypes.number,
-  }),
   handleOpenCart: PropTypes.func,
-  incrementProductCount: PropTypes.func,
-  decrementProductCount: PropTypes.func,
+  items: PropTypes.array,
+  currentCurrency: PropTypes.string,
+  cartCount: PropTypes.number,
 };
+
+const mapStateToProps = (state) => ({
+  items: state.cart.items,
+  cartCount: state.cart.count,
+  currentCurrency: state.cart.currentCurrency,
+});
+
+export default connect(mapStateToProps, null)(HeaderCart);
