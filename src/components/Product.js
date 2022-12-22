@@ -9,7 +9,7 @@ class Product extends Component {
   }
 
   getAttributeItems(attribute) {
-    const { product } = this.props;
+    const { product, updateSelectedAttribute, isOnProductPage } = this.props;
     let items = attribute.items.map((item) => {
       return (
         <AttributeItem
@@ -17,6 +17,8 @@ class Product extends Component {
           product={product}
           item={item}
           attribute={attribute}
+          updateSelectedAttribute={updateSelectedAttribute}
+          isOnProductPage={isOnProductPage}
         />
       );
     });
@@ -61,6 +63,8 @@ class Product extends Component {
 Product.propTypes = {
   product: PropTypes.object,
   currentCurrency: PropTypes.string,
+  updateSelectedAttribute: PropTypes.func,
+  isOnProductPage: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

@@ -40,8 +40,13 @@ class ProductPage extends Component {
     fetchProduct();
   }
 
-  updateSelectedAttribute(product, attribute, item) {
-    this.setState(() => {
+  componentDidUpdate() {
+    console.log(this.state.product.attributes[0].selected)
+  }
+
+  updateSelectedAttribute(attribute, item) {
+    this.setState((prevState) => {
+      const { product } = prevState;
       const attr = product.attributes.find(
         (attr) => attr.name === attribute.name
       );
@@ -56,7 +61,7 @@ class ProductPage extends Component {
 
   render() {
     const { product, img } = this.state;
-    const { currentCurrency } = this.props.state;
+    const { currentCurrency } = this.props;
     const price = product
       ? product.prices.find((el) => el.currency.symbol === currentCurrency)
       : null;
@@ -90,12 +95,9 @@ class ProductPage extends Component {
 
             <div>
               <Product
-                state={{
-                  ...this.props.state,
-                  product,
-                  isOnProductPage: true,
-                  updateSelectedAttribute,
-                }}
+                product={product}
+                isOnProductPage={true}
+                updateSelectedAttribute={updateSelectedAttribute}
               />
               <p className="product-page-price">PRICE:</p>
               <p className="product-price">
@@ -128,14 +130,18 @@ ProductPage.propTypes = {
   params: PropTypes.shape({
     id: PropTypes.string,
   }),
-  state: PropTypes.shape({
-    currentCurrency: PropTypes.string,
-  }),
+  currentCurrency: PropTypes.string,
   addToCart: PropTypes.func,
 };
+
+const mapStateToProps = (state) => ({
+  currentCurrency: state.cart.currentCurrency,
+});
 
 const mapDispatchToProps = {
   addToCart,
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(ProductPage));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ProductPage)
+);

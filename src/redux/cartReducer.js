@@ -7,7 +7,6 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const product = action.payload;
-      console.log(product);
       const sameProduct = state.items.find((el) => {
         let isSame = false;
         if (el.id === product.id) {

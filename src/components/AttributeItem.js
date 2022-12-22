@@ -2,14 +2,23 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class AttributeItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedAttr: this.props.attribute.selected,
+    };
+  }
+
+  componentDidMount() {
+    console.log(this.state.selectedAttr);
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.selectedAttr);
+  }
   render() {
-    const {
-      isOnProductPage,
-      updateSelectedAttribute,
-      product,
-      attribute,
-      item,
-    } = this.props;
+    const { isOnProductPage, updateSelectedAttribute, attribute, item } =
+      this.props;
     const selectedAttr = attribute.selected;
     const isSelected =
       selectedAttr && selectedAttr.displayValue === item.displayValue;
@@ -20,7 +29,7 @@ export default class AttributeItem extends Component {
         onClick={
           isOnProductPage
             ? () => {
-                updateSelectedAttribute(product, attribute, item);
+                updateSelectedAttribute(attribute, item);
               }
             : null
         }
@@ -33,7 +42,7 @@ export default class AttributeItem extends Component {
         onClick={
           isOnProductPage
             ? () => {
-                updateSelectedAttribute(product, attribute, item);
+                updateSelectedAttribute(attribute, item);
               }
             : null
         }

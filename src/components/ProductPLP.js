@@ -36,7 +36,7 @@ class ProductPLP extends Component {
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
-        <Link to={`${product.category}/${product.id}`}>
+        <Link to={`products/${product.id}`}>
           {!product.inStock && <div className="out-of-stock">OUT OF STOCK</div>}
 
           <img

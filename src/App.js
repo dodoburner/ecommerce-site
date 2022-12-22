@@ -88,7 +88,7 @@ export default class App extends Component {
           />
           <Route
             path="category/:categoryId/products/:id"
-            element={<ProductPage state={this.state} />}
+            element={<ProductPage />}
           />
         </Routes>
       </div>
