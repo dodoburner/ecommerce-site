@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import emptyCart from "../assets/empty-cart-white.png";
-export default class ProductPLP extends Component {
+import { connect } from "react-redux";
+class ProductPLP extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,3 +69,9 @@ ProductPLP.propTypes = {
   product: PropTypes.object,
   currentCurrency: PropTypes.string,
 };
+
+const mapStateToProps = (state) => ({
+  currentCurrency: state.cart.currentCurrency,
+});
+
+export default connect(mapStateToProps, null)(ProductPLP);

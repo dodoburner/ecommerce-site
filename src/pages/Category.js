@@ -4,13 +4,11 @@ import ProductPLP from "../components/ProductPLP";
 import { getCategory } from "../data";
 import { client } from "..";
 import withRouter from "../hoc/withRouter";
-import { connect } from "react-redux";
 class Category extends Component {
   constructor() {
     super();
     this.state = {
       category: {},
-      currentCurrency: "$",
     };
   }
 
@@ -27,7 +25,7 @@ class Category extends Component {
   }
 
   render() {
-    const { category, currentCurrency } = this.state;
+    const { category } = this.state;
     const { addToCart } = this.props;
 
     return (
@@ -46,7 +44,6 @@ class Category extends Component {
                   <ProductPLP
                     key={product.name}
                     product={product}
-                    currentCurrency={currentCurrency}
                     addToCart={addToCart}
                   />
                 );
@@ -64,6 +61,7 @@ Category.propTypes = {
     category: PropTypes.string,
   }),
   addToCart: PropTypes.func,
+  currentCurrency: PropTypes.string,
 };
 
-export default withRouter(connect(null, null)(Category));
+export default withRouter(Category);

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const cartSlice = createSlice({
   name: "cart",
-  initialState: { items: [], count: 0 },
+  initialState: { items: [], count: 0, currentCurrency: "$" },
   reducers: {
     addToCart: (state, action) => {
       const product = action.payload;
