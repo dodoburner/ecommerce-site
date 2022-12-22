@@ -1,58 +1,33 @@
 import React, { Component } from "react";
-import { client } from "..";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getProduct } from "../data";
 import Product from "../components/Product";
 import withRouter from "../hoc/withRouter";
 import _ from "lodash";
 import parse from "html-react-parser";
 import { addToCart } from "../redux/cartReducer";
+import {
+  fetchProduct,
+  updateSelectedAttribute,
+} from "../redux/productPDPReducer";
 
 class ProductPage extends Component {
   constructor(props) {
     super(props);
-    this.updateSelectedAttribute = this.updateSelectedAttribute.bind(this);
     this.updateImg = this.updateImg.bind(this);
     this.state = {
-      product: null,
       img: null,
     };
   }
 
   componentDidMount() {
-    const fetchProduct = async () => {
-      const { id } = this.props.params;
-      const response = await client.query({
-        query: getProduct,
-        variables: { id },
-      });
-      const product = response.data.product;
-      const attributes = product.attributes.map((attribute) => {
-        return { ...attribute, selected: attribute.items[0] };
-      });
-      this.setState({
-        product: { ...product, attributes },
-        img: product.gallery[0],
-      });
-    };
-
-    fetchProduct();
+    this.props.fetchProduct(this.props.params.id);
   }
 
   componentDidUpdate() {
-    console.log(this.state.product.attributes[0].selected)
-  }
-
-  updateSelectedAttribute(attribute, item) {
-    this.setState((prevState) => {
-      const { product } = prevState;
-      const attr = product.attributes.find(
-        (attr) => attr.name === attribute.name
-      );
-      attr.selected = item;
-      return { product };
-    });
+    if (!this.state.img) {
+      this.setState({ img: this.props.product.gallery[0] });
+    }
   }
 
   updateImg(img) {
@@ -60,7 +35,8 @@ class ProductPage extends Component {
   }
 
   render() {
-    const { product, img } = this.state;
+    const { img } = this.state;
+    const { product } = this.props;
     const { currentCurrency } = this.props;
     const price = product
       ? product.prices.find((el) => el.currency.symbol === currentCurrency)
@@ -132,14 +108,19 @@ ProductPage.propTypes = {
   }),
   currentCurrency: PropTypes.string,
   addToCart: PropTypes.func,
+  fetchProduct: PropTypes.func,
+  product: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   currentCurrency: state.cart.currentCurrency,
+  product: state.productPDP.details,
 });
 
 const mapDispatchToProps = {
   addToCart,
+  fetchProduct,
+  updateSelectedAttribute,
 };
 
 export default withRouter(
