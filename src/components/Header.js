@@ -58,12 +58,7 @@ class Header extends Component {
                 this.handleOpenCart();
               }}
             >
-              <HeaderCart
-                // state={this.props.state}
-                // incrementProductCount={incrementProductCount}
-                // decrementProductCount={decrementProductCount}
-                handleOpenCart={this.handleOpenCart}
-              />
+              <HeaderCart handleOpenCart={this.handleOpenCart} />
             </div>
           )}
         </div>
@@ -73,16 +68,6 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  // state: PropTypes.shape({
-  //   categories: PropTypes.array,
-  //   currentCategory: PropTypes.object,
-  //   currentCurrency: PropTypes.string,
-  //   cartCount: PropTypes.number,
-  // }),
-  // incrementProductCount: PropTypes.func,
-  // decrementProductCount: PropTypes.func,
-  // updateCurrentCategory: PropTypes.func,
-  // updateCurrentCurrency: PropTypes.func,
   cartCount: PropTypes.number,
 };
 

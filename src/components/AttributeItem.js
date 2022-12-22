@@ -4,9 +4,21 @@ import { connect } from "react-redux";
 import { updateSelectedAttribute } from "../redux/productPDPReducer";
 
 class AttributeItem extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    const { updateSelectedAttribute, attribute, item } = this.props;
+    if (e.target.matches(".product-page *")) {
+      updateSelectedAttribute({ attribute, item });
+    }
+    return false;
+  }
+
   render() {
-    const { isOnProductPage, updateSelectedAttribute, attribute, item } =
-      this.props;
+    const { attribute, item } = this.props;
     const selectedAttr = attribute.selected;
     const isSelected =
       selectedAttr && selectedAttr.displayValue === item.displayValue;
@@ -14,26 +26,14 @@ class AttributeItem extends Component {
     return attribute.type === "text" ? (
       <div
         className={`item-text ${isSelected ? "item-text-selected" : ""}`}
-        onClick={
-          isOnProductPage
-            ? () => {
-                updateSelectedAttribute({attribute, item});
-              }
-            : null
-        }
+        onClick={this.handleClick}
       >
         <p>{item.displayValue}</p>
       </div>
     ) : (
       <div
         className={`item-swatch ${isSelected ? "item-swatch-selected" : ""}`}
-        onClick={
-          isOnProductPage
-            ? () => {
-                updateSelectedAttribute({attribute, item});
-              }
-            : null
-        }
+        onClick={this.handleClick}
       >
         <div style={{ background: item.value }}></div>
       </div>
@@ -42,20 +42,13 @@ class AttributeItem extends Component {
 }
 
 AttributeItem.propTypes = {
-  isOnProductPage: PropTypes.bool,
   updateSelectedAttribute: PropTypes.func,
-  product: PropTypes.object,
   attribute: PropTypes.object,
   item: PropTypes.object,
 };
-
-const mapStateToProps = (state) => ({
-  currentCurrency: state.cart.currentCurrency,
-  product: state.productPDP.details,
-});
 
 const mapDispatchToProps = {
   updateSelectedAttribute,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AttributeItem);
+export default connect(null, mapDispatchToProps)(AttributeItem);

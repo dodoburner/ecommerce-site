@@ -13,10 +13,7 @@ class Nav extends Component {
         {categories.map((category) => {
           const headerActive = location.pathname.includes(category);
           return (
-            <li
-              className={headerActive ? "header-active" : ""}
-              key={category}
-            >
+            <li className={headerActive ? "header-active" : ""} key={category}>
               <Link to={`category/${category}`}> {category}</Link>
               {headerActive ? <div className="header-active-line"></div> : null}
             </li>
@@ -28,7 +25,6 @@ class Nav extends Component {
 }
 
 Nav.propTypes = {
-  updateCurrentCategory: PropTypes.func,
   location: PropTypes.object,
 };
 
