@@ -31,45 +31,6 @@ export default class App extends Component {
   //   }
   // }
 
-  // updateCurrentCategory(value) {
-  //   this.setState({ currentCategory: value });
-  // }
-
-  // updateCurrentCurrency(value) {
-  //   this.setState({ currentCurrency: value });
-  // }
-
-  // incrementProductCount(cartId) {
-  //   this.setState((prevState) => {
-  //     const product = prevState.cart.find(
-  //       (product) => cartId === product.cartId
-  //     );
-  //     product.count += 1;
-  //     return {
-  //       cart: [...prevState.cart],
-  //       cartCount: (prevState.cartCount += 1),
-  //     };
-  //   });
-  // }
-
-  // decrementProductCount(cartId) {
-  //   this.setState((prevState) => {
-  //     const product = prevState.cart.find(
-  //       (product) => cartId === product.cartId
-  //     );
-  //     if (product.count === 1) {
-  //       const index = prevState.cart.indexOf(product);
-  //       prevState.cart.splice(index, 1);
-  //     } else {
-  //       product.count -= 1;
-  //     }
-  //     return {
-  //       cart: [...prevState.cart],
-  //       cartCount: (prevState.cartCount -= 1),
-  //     };
-  //   });
-  // }
-
   render() {
     return (
       <div className="App">

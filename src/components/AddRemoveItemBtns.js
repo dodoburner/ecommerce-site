@@ -1,25 +1,43 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {
+  incrementProductCount,
+  decrementProductCount,
+} from "../redux/cartReducer";
 
-export default class AddRemoveItemBtns extends Component {
+class AddRemoveItemBtns extends Component {
   render() {
     const { incrementProductCount, decrementProductCount, product } =
-      this.props.state;
+      this.props;
 
     return (
       <div className="product-amount">
-        <button onClick={() => incrementProductCount(product.cartId)}>+</button>
+        <button
+          onClick={() => incrementProductCount({ cartId: product.cartId })}
+        >
+          +
+        </button>
         <p>{product.count}</p>
-        <button onClick={() => decrementProductCount(product.cartId)}>-</button>
+        <button
+          onClick={() => decrementProductCount({ cartId: product.cartId })}
+        >
+          -
+        </button>
       </div>
     );
   }
 }
 
 AddRemoveItemBtns.propTypes = {
-  state: PropTypes.shape({
-    incrementProductCount: PropTypes.func,
-    decrementProductCount: PropTypes.func,
-    product: PropTypes.object,
-  }),
+  incrementProductCount: PropTypes.func,
+  decrementProductCount: PropTypes.func,
+  product: PropTypes.object,
 };
+
+const mapDispatchToProps = {
+  incrementProductCount,
+  decrementProductCount,
+};
+
+export default connect(null, mapDispatchToProps)(AddRemoveItemBtns);

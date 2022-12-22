@@ -69,9 +69,7 @@ class ProductPage extends Component {
             </div>
 
             <div>
-              <Product
-                isOnProductPage={true}
-              />
+              <Product isOnProductPage={true} product={product} />
               <p className="product-page-price">PRICE:</p>
               <p className="product-price">
                 {currentCurrency}

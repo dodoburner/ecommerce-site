@@ -32,9 +32,31 @@ export const cartSlice = createSlice({
     updateCurrentCurrency: (state, action) => {
       state.currentCurrency = action.payload;
     },
+    incrementProductCount: (state, action) => {
+      const { cartId } = action.payload;
+      const product = state.items.find((product) => cartId === product.cartId);
+      product.count += 1;
+      state.count += 1;
+    },
+    decrementProductCount: (state, action) => {
+      const { cartId } = action.payload;
+      const product = state.items.find((product) => cartId === product.cartId);
+      if (product.count === 1) {
+        const index = state.items.indexOf(product);
+        state.items.splice(index, 1);
+      } else {
+        product.count -= 1;
+      }
+      state.count -= 1;
+    },
   },
 });
 
-export const { addToCart, updateCurrentCurrency } = cartSlice.actions;
+export const {
+  addToCart,
+  updateCurrentCurrency,
+  incrementProductCount,
+  decrementProductCount,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

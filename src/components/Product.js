@@ -68,7 +68,6 @@ Product.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentCurrency: state.cart.currentCurrency,
-  product: state.productPDP.details,
 });
 
 export default connect(mapStateToProps, null)(Product);
