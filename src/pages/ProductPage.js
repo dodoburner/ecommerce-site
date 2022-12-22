@@ -42,7 +42,6 @@ class ProductPage extends Component {
       ? product.prices.find((el) => el.currency.symbol === currentCurrency)
       : null;
     const { addToCart } = this.props;
-    const updateSelectedAttribute = this.updateSelectedAttribute;
 
     return (
       <div className="product-page">
@@ -71,9 +70,7 @@ class ProductPage extends Component {
 
             <div>
               <Product
-                product={product}
                 isOnProductPage={true}
-                updateSelectedAttribute={updateSelectedAttribute}
               />
               <p className="product-page-price">PRICE:</p>
               <p className="product-price">

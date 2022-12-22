@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AttributeItem from "./AttributeItem";
 import { connect } from "react-redux";
+
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -9,15 +10,13 @@ class Product extends Component {
   }
 
   getAttributeItems(attribute) {
-    const { product, updateSelectedAttribute, isOnProductPage } = this.props;
+    const { isOnProductPage } = this.props;
     let items = attribute.items.map((item) => {
       return (
         <AttributeItem
           key={item.displayValue}
-          product={product}
           item={item}
           attribute={attribute}
-          updateSelectedAttribute={updateSelectedAttribute}
           isOnProductPage={isOnProductPage}
         />
       );
@@ -69,6 +68,7 @@ Product.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentCurrency: state.cart.currentCurrency,
+  product: state.productPDP.details,
 });
 
 export default connect(mapStateToProps, null)(Product);

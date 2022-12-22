@@ -1,21 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { updateSelectedAttribute } from "../redux/productPDPReducer";
 
-export default class AttributeItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedAttr: this.props.attribute.selected,
-    };
-  }
-
-  componentDidMount() {
-    console.log(this.state.selectedAttr);
-  }
-
-  componentDidUpdate() {
-    console.log(this.state.selectedAttr);
-  }
+class AttributeItem extends Component {
   render() {
     const { isOnProductPage, updateSelectedAttribute, attribute, item } =
       this.props;
@@ -29,7 +17,7 @@ export default class AttributeItem extends Component {
         onClick={
           isOnProductPage
             ? () => {
-                updateSelectedAttribute(attribute, item);
+                updateSelectedAttribute({attribute, item});
               }
             : null
         }
@@ -42,7 +30,7 @@ export default class AttributeItem extends Component {
         onClick={
           isOnProductPage
             ? () => {
-                updateSelectedAttribute(attribute, item);
+                updateSelectedAttribute({attribute, item});
               }
             : null
         }
@@ -60,3 +48,14 @@ AttributeItem.propTypes = {
   attribute: PropTypes.object,
   item: PropTypes.object,
 };
+
+const mapStateToProps = (state) => ({
+  currentCurrency: state.cart.currentCurrency,
+  product: state.productPDP.details,
+});
+
+const mapDispatchToProps = {
+  updateSelectedAttribute,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AttributeItem);
