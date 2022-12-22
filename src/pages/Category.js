@@ -1,9 +1,33 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProductPLP from "../components/ProductPLP";
-export default class Category extends Component {
+import { getCategory } from "../data";
+import { client } from "..";
+import withRouter from "../hoc/withRouter";
+import { connect } from "react-redux";
+class Category extends Component {
+  constructor() {
+    super();
+    this.state = {
+      category: {},
+      currentCurrency: "$",
+    };
+  }
+
+  componentDidMount() {
+    const fetchData = async () => {
+      const response = await client.query({
+        query: getCategory,
+        variables: { title: this.props.params.category },
+      });
+      const category = response.data.category;
+      this.setState({ category });
+    };
+    fetchData();
+  }
+
   render() {
-    const { currentCategory: category, currentCurrency } = this.props.state;
+    const { category, currentCurrency } = this.state;
     const { addToCart } = this.props;
 
     return (
@@ -36,9 +60,10 @@ export default class Category extends Component {
 }
 
 Category.propTypes = {
-  state: PropTypes.shape({
-    currentCategory: PropTypes.object,
-    currentCurrency: PropTypes.string,
+  params: PropTypes.shape({
+    category: PropTypes.string,
   }),
   addToCart: PropTypes.func,
 };
+
+export default withRouter(connect(null, null)(Category));

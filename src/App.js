@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import { client } from ".";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 import Category from "./pages/Category";
 import Cart from "./pages/Cart";
 import ProductPage from "./pages/ProductPage";
-import getData from "./data";
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      categories: [],
-      currentCategory: {},
+
       currentCurrency: "$",
     };
     this.updateCurrentCategory = this.updateCurrentCategory.bind(this);
@@ -26,13 +23,6 @@ export default class App extends Component {
     if (cart) {
       this.setState({ cart, cartCount });
     }
-
-    const fetchData = async () => {
-      const response = await client.query({ query: getData });
-      const categories = response.data.categories;
-      this.setState({ categories, currentCategory: categories[0] });
-    };
-    fetchData();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -84,16 +74,16 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header
+        {/* <Header
           state={this.state}
           updateCurrentCategory={this.updateCurrentCategory}
           updateCurrentCurrency={this.updateCurrentCurrency}
           incrementProductCount={this.incrementProductCount}
           decrementProductCount={this.decrementProductCount}
-        />
+        /> */}
         <Routes>
           <Route
-            path="/"
+            path="/:category"
             element={
               <Category
                 state={this.state}
