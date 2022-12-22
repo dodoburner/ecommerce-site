@@ -10,18 +10,26 @@ class Category extends Component {
     this.state = {
       category: {},
     };
+    this.fetchData = this.fetchData.bind(this);
   }
 
+  fetchData = async () => {
+    const response = await client.query({
+      query: getCategory,
+      variables: { title: this.props.params.category },
+    });
+    const category = response.data.category;
+    this.setState({ category });
+  };
+
   componentDidMount() {
-    const fetchData = async () => {
-      const response = await client.query({
-        query: getCategory,
-        variables: { title: this.props.params.category },
-      });
-      const category = response.data.category;
-      this.setState({ category });
-    };
-    fetchData();
+    this.fetchData();
+  }
+
+  componentDidUpdate() {
+    if (this.props.params.category !== this.state.category.name) {
+      this.fetchData();
+    }
   }
 
   render() {
