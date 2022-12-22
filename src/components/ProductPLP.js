@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import emptyCart from "../assets/empty-cart-white.png";
 import { connect } from "react-redux";
+import { addToCart } from "../redux/cartReducer";
 class ProductPLP extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +45,9 @@ class ProductPLP extends Component {
             src={product.gallery[0]}
             alt="product"
           />
-          <p className="plp-product-name">{product.brand} {product.name}</p>
+          <p className="plp-product-name">
+            {product.brand} {product.name}
+          </p>
           <p className="plp-product-price">
             {price.currency.symbol}
             {price.amount}
@@ -74,4 +77,8 @@ const mapStateToProps = (state) => ({
   currentCurrency: state.cart.currentCurrency,
 });
 
-export default connect(mapStateToProps, null)(ProductPLP);
+const mapDispatchToProps = {
+  addToCart,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPLP);

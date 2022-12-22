@@ -34,7 +34,6 @@ class Category extends Component {
 
   render() {
     const { category } = this.state;
-    const { addToCart } = this.props;
 
     return (
       <div className="category-container">
@@ -48,13 +47,7 @@ class Category extends Component {
                 });
                 product = { ...product, attributes };
 
-                return (
-                  <ProductPLP
-                    key={product.name}
-                    product={product}
-                    addToCart={addToCart}
-                  />
-                );
+                return <ProductPLP key={product.name} product={product} />;
               })}
             </div>
           </>
@@ -68,8 +61,6 @@ Category.propTypes = {
   params: PropTypes.shape({
     categoryId: PropTypes.string,
   }),
-  addToCart: PropTypes.func,
-  currentCurrency: PropTypes.string,
 };
 
 export default withRouter(Category);
