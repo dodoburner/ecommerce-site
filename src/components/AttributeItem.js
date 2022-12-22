@@ -3,8 +3,13 @@ import PropTypes from "prop-types";
 
 export default class AttributeItem extends Component {
   render() {
-    const { isOnProductPage, updateSelectedAttribute, product, attribute, item } =
-      this.props.state;
+    const {
+      isOnProductPage,
+      updateSelectedAttribute,
+      product,
+      attribute,
+      item,
+    } = this.props;
     const selectedAttr = attribute.selected;
     const isSelected =
       selectedAttr && selectedAttr.displayValue === item.displayValue;
@@ -40,11 +45,9 @@ export default class AttributeItem extends Component {
 }
 
 AttributeItem.propTypes = {
-  state: PropTypes.shape({
-    isOnProductPage: PropTypes.bool,
-    updateSelectedAttribute: PropTypes.func,
-    product: PropTypes.object,
-    attribute: PropTypes.object,
-    item: PropTypes.object,
-  }),
+  isOnProductPage: PropTypes.bool,
+  updateSelectedAttribute: PropTypes.func,
+  product: PropTypes.object,
+  attribute: PropTypes.object,
+  item: PropTypes.object,
 };

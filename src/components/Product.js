@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import AttributeItem from "./AttributeItem";
-
-export default class Product extends Component {
+import { connect } from "react-redux";
+class Product extends Component {
   constructor(props) {
     super(props);
     this.getAttributeItems = this.getAttributeItems.bind(this);
   }
 
   getAttributeItems(attribute) {
-    const { product } = this.props.state;
+    const { product } = this.props;
     let items = attribute.items.map((item) => {
       return (
         <AttributeItem
           key={item.displayValue}
-          state={{ ...this.props.state, product, item, attribute }}
+          product={product}
+          item={item}
+          attribute={attribute}
         />
       );
     });
@@ -23,7 +25,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { product, currentCurrency } = this.props.state;
+    const { product, currentCurrency } = this.props;
     const price = product.prices.find(
       (el) => el.currency.symbol === currentCurrency
     );
@@ -57,8 +59,12 @@ export default class Product extends Component {
 }
 
 Product.propTypes = {
-  state: PropTypes.shape({
-    product: PropTypes.object,
-    currentCurrency: PropTypes.string,
-  }),
+  product: PropTypes.object,
+  currentCurrency: PropTypes.string,
 };
+
+const mapStateToProps = (state) => ({
+  currentCurrency: state.cart.currentCurrency,
+});
+
+export default connect(mapStateToProps, null)(Product);

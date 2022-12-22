@@ -16,7 +16,6 @@ class Nav extends Component {
             <li
               className={headerActive ? "header-active" : ""}
               key={category}
-              onClick={() => this.handleCategoryClick(category)}
             >
               <Link to={`category/${category}`}> {category}</Link>
               {headerActive ? <div className="header-active-line"></div> : null}

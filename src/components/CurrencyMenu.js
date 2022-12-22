@@ -66,7 +66,6 @@ class CurrencyMenu extends Component {
   }
 
   handleClickOutside(e) {
-    console.log(e.target);
     const CLASSES = [
       "currency-menu",
       "currency-menu-arrow",

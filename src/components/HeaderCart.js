@@ -34,19 +34,8 @@ class HeaderCart extends Component {
         {items.map((product, index) => {
           return (
             <div className="product" key={index}>
-              <Product
-                state={{
-                  // ...this.props.state,
-                  product,
-                }}
-              />
-              <AddRemoveItemBtns
-                state={{
-                  product,
-                  // incrementProductCount,
-                  // decrementProductCount,
-                }}
-              />
+              <Product product={product} />
+              <AddRemoveItemBtns product={product} />
               <img src={product.gallery[0]} alt={product.name} />
             </div>
           );
