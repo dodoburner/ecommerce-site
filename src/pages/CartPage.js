@@ -4,53 +4,36 @@ import AddRemoveItemBtns from "../components/AddRemoveItemBtns";
 import CartImgGallery from "../components/CartImgGallery";
 import Product from "../components/Product";
 import countTotal from "../utils/countTotal";
-export default class Cart extends Component {
+import { connect } from "react-redux";
+class CartPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      total: countTotal(
-        this.props.state.cart,
-        this.props.state.currentCurrency
-      ),
+      total: countTotal(this.props.cartItems, this.props.currentCurrency),
     };
   }
 
   componentDidUpdate(prevProps) {
-    const { cart: prevCart } = prevProps.state;
-    const { cart, currentCurrency } = this.props.state;
-    if (prevCart !== cart) {
-      this.setState({ total: countTotal(cart, currentCurrency) });
+    const { cartItems: prevCartItems } = prevProps;
+    const { cartItems, currentCurrency } = this.props;
+    if (prevCartItems !== cartItems) {
+      this.setState({ total: countTotal(cartItems, currentCurrency) });
     }
   }
 
   render() {
-    const { cart, currentCurrency, cartCount } = this.props.state;
-    const {
-      incrementProductCount,
-      decrementProductCount,
-    } = this.props;
+    const { cartItems, currentCurrency, cartCount } = this.props;
     const tax = (this.state.total / 21).toFixed(2);
 
     return (
       <div className="cart-page">
         <h1>CART</h1>
 
-        {cart.map((product, index) => {
+        {cartItems.map((product, index) => {
           return (
             <div className="product-large" key={index}>
-              <Product
-                state={{
-                  ...this.props.state,
-                  product,
-                }}
-              />
-              <AddRemoveItemBtns
-                state={{
-                  product,
-                  incrementProductCount,
-                  decrementProductCount,
-                }}
-              />
+              <Product product={product} />
+              <AddRemoveItemBtns product={product} />
               <CartImgGallery product={product} />
             </div>
           );
@@ -81,12 +64,18 @@ export default class Cart extends Component {
   }
 }
 
-Cart.propTypes = {
-  state: PropTypes.shape({
-    cart: PropTypes.array,
-    currentCurrency: PropTypes.string,
-    cartCount: PropTypes.number,
-  }),
+CartPage.propTypes = {
+  cartItems: PropTypes.array,
+  currentCurrency: PropTypes.string,
+  cartCount: PropTypes.number,
   incrementProductCount: PropTypes.func,
   decrementProductCount: PropTypes.func,
 };
+
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.items,
+  cartCount: state.cart.count,
+  currentCurrency: state.cart.currentCurrency,
+});
+
+export default connect(mapStateToProps, null)(CartPage);
