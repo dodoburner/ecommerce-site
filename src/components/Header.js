@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import logo from "../assets/a-logo.png";
-// import HeaderCart from "./HeaderCart";
-// import emptyCart from "../assets/empty-cart.png";
-// import CurrencyMenu from "./CurrencyMenu";
+import HeaderCart from "./HeaderCart";
+import emptyCart from "../assets/empty-cart.png";
+import CurrencyMenu from "./CurrencyMenu";
 import Nav from "./Nav";
 
 export default class Header extends Component {
@@ -46,17 +46,17 @@ export default class Header extends Component {
           <img className="logo" src={logo} alt="store logo" />
         </Link>
 
-        {/* <div className="currency-cart-container">
+        <div className="currency-cart-container">
           <CurrencyMenu
-            state={{ currentCurrency, currentCategory }}
-            updateCurrentCurrency={updateCurrentCurrency}
+            // state={{ currentCurrency, currentCategory }}
+            // updateCurrentCurrency={updateCurrentCurrency}
           />
 
           <div className="cart-img-container" onClick={this.handleOpenCart}>
             <img className="cart-img" src={emptyCart} alt="cart" />
-            {cartCount > 0 ? (
+            {/* {cartCount > 0 ? (
               <div className="cart-count">{cartCount}</div>
-            ) : null}
+            ) : null} */}
           </div>
 
           {this.state.cartOpen && (
@@ -69,13 +69,13 @@ export default class Header extends Component {
             >
               <HeaderCart
                 state={this.props.state}
-                incrementProductCount={incrementProductCount}
-                decrementProductCount={decrementProductCount}
+                // incrementProductCount={incrementProductCount}
+                // decrementProductCount={decrementProductCount}
                 handleOpenCart={this.handleOpenCart}
               />
             </div>
           )}
-        </div> */}
+        </div>
       </header>
     );
   }

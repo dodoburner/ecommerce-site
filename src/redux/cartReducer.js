@@ -30,9 +30,12 @@ export const cartSlice = createSlice({
         state.count += 1;
       }
     },
+    updateCurrentCurrency: (state, action) => {
+      state.currentCurrency = action.payload;
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, updateCurrentCurrency } = cartSlice.actions;
 
 export default cartSlice.reducer;

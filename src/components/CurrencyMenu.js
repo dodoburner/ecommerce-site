@@ -2,17 +2,41 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import iconDown from "../assets/icon-down.png";
 import iconUp from "../assets/icon-up.png";
+import { connect } from "react-redux";
+import { updateCurrentCurrency } from "../redux/cartReducer";
 
-export default class CurrencyMenu extends Component {
+const CURRENCIES = [
+  {
+    label: "USD",
+    symbol: "$",
+  },
+  {
+    label: "GBP",
+    symbol: "£",
+  },
+  {
+    label: "AUD",
+    symbol: "A$",
+  },
+  {
+    label: "JPY",
+    symbol: "¥",
+  },
+  {
+    label: "RUB",
+    symbol: "₽",
+  },
+];
+
+class CurrencyMenu extends Component {
   constructor(props) {
     super(props);
-    this.renderCurrencies = this.renderCurrencies.bind(this);
-    this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
-    this.handleOpenCurrencyMenu = this.handleOpenCurrencyMenu.bind(this);
     this.state = {
       currencyMenuOpen: false,
     };
-    this.wrapperRef = React.createRef();
+    this.renderCurrencies = this.renderCurrencies.bind(this);
+    this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
+    this.handleOpenCurrencyMenu = this.handleOpenCurrencyMenu.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
@@ -21,19 +45,36 @@ export default class CurrencyMenu extends Component {
   }
 
   handleOpenCurrencyMenu() {
-    this.setState({ currencyMenuOpen: !this.state.currencyMenuOpen });
+    this.setState((prevState) => ({
+      currencyMenuOpen: !prevState.currencyMenuOpen,
+    }));
   }
 
   renderCurrencies() {
-    const { currentCategory } = this.props.state;
-    return currentCategory.products[0].prices.map((price) => {
-      const { symbol, label } = price.currency;
+    return CURRENCIES.map((currency) => {
+      const { symbol, label } = currency;
       return (
-        <li onClick={() => this.handleCurrencyClick(symbol)} key={symbol}>
+        <li
+          onClick={() => this.handleCurrencyClick(symbol)}
+          key={symbol}
+          className="currency-menu-value"
+        >
           {symbol} {label}
         </li>
       );
     });
+  }
+
+  handleClickOutside(e) {
+    console.log(e.target);
+    const CLASSES = [
+      "currency-menu",
+      "currency-menu-arrow",
+      "currency-menu-value",
+    ];
+    if (!CLASSES.includes(e.target.className)) {
+      this.setState({ currencyMenuOpen: false });
+    }
   }
 
   componentDidMount() {
@@ -44,30 +85,21 @@ export default class CurrencyMenu extends Component {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-  handleClickOutside(event) {
-    const { currencyMenuOpen } = this.state;
-    if (
-      currencyMenuOpen &&
-      this.wrapperRef &&
-      !this.wrapperRef.current.contains(event.target)
-    ) {
-      this.setState({ currencyMenuOpen: false });
-    }
-  }
-
   render() {
-    const { currentCurrency, currentCategory } = this.props.state;
+    const { currentCurrency } = this.props;
     const { currencyMenuOpen } = this.state;
 
     return (
       <div className="currency-menu" onClick={this.handleOpenCurrencyMenu}>
         {currentCurrency}
-        <img src={currencyMenuOpen ? iconUp : iconDown} alt="icon-down" />
+        <img
+          src={currencyMenuOpen ? iconUp : iconDown}
+          alt="icon-down"
+          className="currency-menu-arrow"
+        />
 
-        <ul className="currency-dropdown" ref={this.wrapperRef}>
-          {"products" in currentCategory &&
-            currencyMenuOpen &&
-            this.renderCurrencies()}
+        <ul className="currency-dropdown">
+          {currencyMenuOpen ? this.renderCurrencies() : null}
         </ul>
       </div>
     );
@@ -75,9 +107,16 @@ export default class CurrencyMenu extends Component {
 }
 
 CurrencyMenu.propTypes = {
-  state: PropTypes.shape({
-    currentCategory: PropTypes.object,
-    currentCurrency: PropTypes.string,
-  }),
+  currentCurrency: PropTypes.string,
   updateCurrentCurrency: PropTypes.func,
 };
+
+const mapDispatchToProps = {
+  updateCurrentCurrency,
+};
+
+const mapStateToProps = (state) => ({
+  currentCurrency: state.cart.currentCurrency,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencyMenu);
