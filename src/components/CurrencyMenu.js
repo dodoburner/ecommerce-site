@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import iconDown from "../assets/icon-down.png";
 import iconUp from "../assets/icon-up.png";
 import { connect } from "react-redux";
-import { updateCurrentCurrency } from "../redux/cartReducer";
+import { updateCurrentCurrency } from "../redux/cartSlice";
 
 const CURRENCIES = [
   {

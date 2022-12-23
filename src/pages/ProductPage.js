@@ -5,11 +5,12 @@ import Product from "../components/Product";
 import withRouter from "../hoc/withRouter";
 import _ from "lodash";
 import parse from "html-react-parser";
-import { addToCart } from "../redux/cartReducer";
+import { addToCart } from "../redux/cartSlice";
 import {
   fetchProduct,
   updateSelectedAttribute,
-} from "../redux/productPDPReducer";
+} from "../redux/productPDPSlice";
+import ErrorPage from "./ErrorPage";
 
 class ProductPage extends Component {
   constructor(props) {
@@ -25,7 +26,8 @@ class ProductPage extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.img) {
+    const { status } = this.props;
+    if (status === "succeeded" && !this.state.img) {
       this.setState({ img: this.props.product.gallery[0] });
     }
   }
@@ -36,16 +38,18 @@ class ProductPage extends Component {
 
   render() {
     const { img } = this.state;
-    const { product } = this.props;
+    const { product, status } = this.props;
     const { currentCurrency } = this.props;
     const price = product
       ? product.prices.find((el) => el.currency.symbol === currentCurrency)
       : null;
     const { addToCart } = this.props;
 
-    return (
-      <div className="product-page">
-        {product ? (
+    if (status === "failed") {
+      return <ErrorPage />;
+    } else if (status === "succeeded") {
+      return (
+        <div className="product-page">
           <div className="product-large">
             <div className="product-page-imgs">
               {product.gallery.map((img) => {
@@ -91,9 +95,11 @@ class ProductPage extends Component {
               <div className="description"> {parse(product.description)} </div>
             </div>
           </div>
-        ) : null}
-      </div>
-    );
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
@@ -105,11 +111,13 @@ ProductPage.propTypes = {
   addToCart: PropTypes.func,
   fetchProduct: PropTypes.func,
   product: PropTypes.object,
+  status: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   currentCurrency: state.cart.currentCurrency,
   product: state.productPDP.details,
+  status: state.productPDP.status,
 });
 
 const mapDispatchToProps = {

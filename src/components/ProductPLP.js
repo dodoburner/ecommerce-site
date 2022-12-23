@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import emptyCart from "../assets/empty-cart-white.png";
 import { connect } from "react-redux";
-import { addToCart } from "../redux/cartReducer";
+import { addToCart } from "../redux/cartSlice";
 class ProductPLP extends Component {
   constructor(props) {
     super(props);

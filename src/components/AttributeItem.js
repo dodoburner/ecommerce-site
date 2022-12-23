@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { updateSelectedAttribute } from "../redux/productPDPReducer";
+import { updateSelectedAttribute } from "../redux/productPDPSlice";
 
 class AttributeItem extends Component {
   constructor(props) {

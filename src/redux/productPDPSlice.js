@@ -4,7 +4,7 @@ import { getProduct } from "../data";
 
 export const productPDP = createSlice({
   name: "productPDP",
-  initialState: { details: null, status: "idle", error: null },
+  initialState: { details: null, status: "idle" },
   reducers: {
     updateSelectedAttribute: (state, action) => {
       const { details } = state;
@@ -25,9 +25,8 @@ export const productPDP = createSlice({
         state.details = action.payload;
         state.status = "succeeded";
       })
-      .addCase(fetchProduct.rejected, (state, action) => {
+      .addCase(fetchProduct.rejected, (state) => {
         state.status = "failed";
-        state.error = action.error.message;
       });
   },
 });

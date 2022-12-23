@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import {
   incrementProductCount,
   decrementProductCount,
-} from "../redux/cartReducer";
+} from "../redux/cartSlice";
 
 class AddRemoveItemBtns extends Component {
   render() {
