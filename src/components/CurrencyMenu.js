@@ -4,29 +4,7 @@ import iconDown from "../assets/icon-down.png";
 import iconUp from "../assets/icon-up.png";
 import { connect } from "react-redux";
 import { updateCurrentCurrency } from "../redux/cartSlice";
-
-const CURRENCIES = [
-  {
-    label: "USD",
-    symbol: "$",
-  },
-  {
-    label: "GBP",
-    symbol: "£",
-  },
-  {
-    label: "AUD",
-    symbol: "A$",
-  },
-  {
-    label: "JPY",
-    symbol: "¥",
-  },
-  {
-    label: "RUB",
-    symbol: "₽",
-  },
-];
+import { CURRENCIES } from "../data";
 
 class CurrencyMenu extends Component {
   constructor(props) {

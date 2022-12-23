@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import withRouter from "../hoc/withRouter";
+import { CATEGORIES } from "../data";
 
 class Nav extends Component {
   render() {
-    const categories = ["all", "clothes", "tech"];
     const location = this.props.location;
 
     return (
       <ul className="category-list">
-        {categories.map((category) => {
+        {CATEGORIES.map((category) => {
           const headerActive = location.pathname.includes(category);
           return (
             <li className={headerActive ? "header-active" : ""} key={category}>

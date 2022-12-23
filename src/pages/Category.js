@@ -4,11 +4,15 @@ import ProductPLP from "../components/ProductPLP";
 import { getCategory } from "../data";
 import { client } from "..";
 import withRouter from "../hoc/withRouter";
+import ErrorPage from "./ErrorPage";
+import { CATEGORIES } from "../data";
+
 class Category extends Component {
   constructor() {
     super();
     this.state = {
       category: null,
+      status: "idle",
     };
     this.fetchData = this.fetchData.bind(this);
   }
@@ -18,8 +22,13 @@ class Category extends Component {
       query: getCategory,
       variables: { title: this.props.params.categoryId },
     });
-    const category = response.data.category;
-    this.setState({ category });
+
+    const { category } = response.data;
+    if (category) {
+      this.setState({ category, status: "succeeded" });
+    } else {
+      this.setState({ status: "failed" });
+    }
   };
 
   componentDidMount() {
@@ -27,17 +36,24 @@ class Category extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.params.categoryId !== this.state.category.name) {
+    const { categoryId } = this.props.params;
+    const { category, status } = this.state;
+    if (
+      (category && categoryId !== category.name) ||
+      (CATEGORIES.includes(categoryId) && status === "failed")
+    ) {
       this.fetchData();
     }
   }
 
   render() {
-    const { category } = this.state;
+    const { category, status } = this.state;
 
-    return (
-      <div className="category-container">
-        {category && (
+    if (status === "failed") {
+      return <ErrorPage />;
+    } else if (status === "succeeded") {
+      return (
+        <div className="category-container">
           <>
             <h1 className="category-name">{category.name}</h1>
             <div className="products-grid">
@@ -51,9 +67,9 @@ class Category extends Component {
               })}
             </div>
           </>
-        )}
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
 
