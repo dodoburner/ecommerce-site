@@ -2,6 +2,10 @@
   padding: 70px 100px;
 }
 
+.product-page li {
+  list-style-type: disc;
+}
+
 .product-page .product-large {
   border-bottom: none;
 }

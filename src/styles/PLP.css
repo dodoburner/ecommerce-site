@@ -6,12 +6,12 @@
   font-weight: 400;
   font-size: 42px;
   line-height: 160%;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 386px);
   column-gap: 40px;
   row-gap: 100px;
 }
@@ -46,7 +46,6 @@
 
 .plp-product-img {
   height: 338px;
-  min-width: 356px;
   width: 100%;
   margin-bottom: 24px;
 }

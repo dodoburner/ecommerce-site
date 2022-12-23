@@ -28,7 +28,10 @@ class HeaderCart extends Component {
     return (
       <div className="cart">
         <p className="cart-title">
-          My Bag, <span>{cartCount} items</span>
+          My Bag,{" "}
+          <span>
+            {cartCount} {cartCount === 1 ? "item" : "items"}
+          </span>
         </p>
 
         {items.map((product, index) => {
