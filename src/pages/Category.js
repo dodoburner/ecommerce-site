@@ -8,7 +8,7 @@ class Category extends Component {
   constructor() {
     super();
     this.state = {
-      category: {},
+      category: null,
     };
     this.fetchData = this.fetchData.bind(this);
   }
@@ -37,7 +37,7 @@ class Category extends Component {
 
     return (
       <div className="category-container">
-        {"products" in category && (
+        {category && (
           <>
             <h1 className="category-name">{category.name}</h1>
             <div className="products-grid">

@@ -17,3 +17,10 @@ button {
   background-color: white;
   cursor: pointer;
 }
+
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}

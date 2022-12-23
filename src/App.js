@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Category from "./pages/Category";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import { connect } from "react-redux";
+import ErrorPage from "./pages/ErrorPage";
 class App extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.cartItems !== this.props.cartItems) {
@@ -31,6 +32,8 @@ class App extends Component {
             path="category/:categoryId/products/:id"
             element={<ProductPage />}
           />
+          <Route path="/" element={<Navigate to="category/all" />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     );
