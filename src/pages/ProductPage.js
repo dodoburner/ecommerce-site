@@ -9,6 +9,7 @@ import { addToCart } from "../redux/cartSlice";
 import {
   fetchProduct,
   updateSelectedAttribute,
+  removeProduct,
 } from "../redux/productPDPSlice";
 import ErrorPage from "./ErrorPage";
 
@@ -30,6 +31,10 @@ class ProductPage extends Component {
     if (status === "succeeded" && !this.state.img) {
       this.setState({ img: this.props.product.gallery[0] });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.removeProduct();
   }
 
   updateImg(img) {
@@ -110,6 +115,7 @@ ProductPage.propTypes = {
   currentCurrency: PropTypes.string,
   addToCart: PropTypes.func,
   fetchProduct: PropTypes.func,
+  removeProduct: PropTypes.func,
   product: PropTypes.object,
   status: PropTypes.string,
 };
@@ -124,6 +130,7 @@ const mapDispatchToProps = {
   addToCart,
   fetchProduct,
   updateSelectedAttribute,
+  removeProduct,
 };
 
 export default withRouter(

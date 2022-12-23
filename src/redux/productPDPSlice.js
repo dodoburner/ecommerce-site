@@ -15,6 +15,10 @@ export const productPDP = createSlice({
       attr.selected = item;
       state.details = details;
     },
+    removeProduct: (state) => {
+      state.status = "idle";
+      state.details = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -43,6 +47,6 @@ export const fetchProduct = createAsyncThunk("cars/fetchCars", async (id) => {
   return { ...product, attributes };
 });
 
-export const { updateSelectedAttribute } = productPDP.actions;
+export const { updateSelectedAttribute, removeProduct } = productPDP.actions;
 
 export default productPDP.reducer;
