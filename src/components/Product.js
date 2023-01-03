@@ -36,7 +36,7 @@ class Product extends Component {
           <p className="product-name">{product.name}</p>
           <p className="product-price">
             {currentCurrency}
-            {price.amount}
+            {price.amount.toFixed(2)}
           </p>
 
           <div className="product-attributes-container">

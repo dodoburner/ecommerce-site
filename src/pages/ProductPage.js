@@ -82,7 +82,7 @@ class ProductPage extends Component {
               <p className="product-page-price">PRICE:</p>
               <p className="product-price">
                 {currentCurrency}
-                {price.amount}
+                {price.amount.toFixed(2)}
               </p>
               {product.inStock ? (
                 <button

@@ -50,7 +50,7 @@ class ProductPLP extends Component {
           </p>
           <p className="plp-product-price">
             {price.currency.symbol}
-            {price.amount}
+            {price.amount.toFixed(2)}
           </p>
         </Link>
 
