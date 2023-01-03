@@ -4,13 +4,15 @@ import iconDown from "../assets/icon-down.png";
 import iconUp from "../assets/icon-up.png";
 import { connect } from "react-redux";
 import { updateCurrentCurrency } from "../redux/cartSlice";
-import { CURRENCIES } from "../data";
+import { getCurrencies } from "../data";
+import { client } from "..";
 
 class CurrencyMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currencyMenuOpen: false,
+      currencies: null,
     };
     this.renderCurrencies = this.renderCurrencies.bind(this);
     this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
@@ -29,7 +31,8 @@ class CurrencyMenu extends Component {
   }
 
   renderCurrencies() {
-    return CURRENCIES.map((currency) => {
+    const { currencies } = this.state;
+    return currencies?.map((currency) => {
       const { symbol, label } = currency;
       return (
         <li
@@ -55,6 +58,13 @@ class CurrencyMenu extends Component {
   }
 
   componentDidMount() {
+    client
+      .query({
+        query: getCurrencies,
+      })
+      .then((res) => {
+        this.setState({ currencies: res.data.currencies });
+      });
     document.addEventListener("mousedown", this.handleClickOutside);
   }
 
@@ -86,10 +96,12 @@ class CurrencyMenu extends Component {
 CurrencyMenu.propTypes = {
   currentCurrency: PropTypes.string,
   updateCurrentCurrency: PropTypes.func,
+  getCurrencies: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   updateCurrentCurrency,
+  getCurrencies,
 };
 
 const mapStateToProps = (state) => ({

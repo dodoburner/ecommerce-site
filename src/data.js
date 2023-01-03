@@ -2,28 +2,14 @@ import { gql } from "@apollo/client";
 
 export const CATEGORIES = ["all", "clothes", "tech"];
 
-export const CURRENCIES = [
+export const getCurrencies = gql`
   {
-    label: "USD",
-    symbol: "$",
-  },
-  {
-    label: "GBP",
-    symbol: "£",
-  },
-  {
-    label: "AUD",
-    symbol: "A$",
-  },
-  {
-    label: "JPY",
-    symbol: "¥",
-  },
-  {
-    label: "RUB",
-    symbol: "₽",
-  },
-];
+    currencies {
+      symbol
+      label
+    }
+  }
+`
 
 export const getProduct = gql`
   query Product($id: String!) {
