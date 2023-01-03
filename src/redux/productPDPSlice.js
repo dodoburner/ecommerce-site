@@ -35,7 +35,7 @@ export const productPDP = createSlice({
   },
 });
 
-export const fetchProduct = createAsyncThunk("cars/fetchCars", async (id) => {
+export const fetchProduct = createAsyncThunk("products/FetchProducts", async (id) => {
   const response = await client.query({
     query: getProduct,
     variables: { id },
