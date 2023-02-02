@@ -110,17 +110,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
-}
-
-.item-swatch div {
-  height: 16px;
-  width: 16px;
 }
 
 .item-swatch-selected,
 .product-page .item-swatch:hover {
-  border-color: #5ece7b;
+  border: 2px solid black;
 }
 
 .product {

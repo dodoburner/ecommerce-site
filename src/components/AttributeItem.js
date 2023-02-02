@@ -33,10 +33,9 @@ class AttributeItem extends Component {
     ) : (
       <div
         className={`item-swatch ${isSelected ? "item-swatch-selected" : ""}`}
+        style={{ background: item.value }}
         onClick={this.handleClick}
-      >
-        <div style={{ background: item.value }}></div>
-      </div>
+      />
     );
   }
 }
