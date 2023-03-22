@@ -14,7 +14,7 @@ import { BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
 
 export const client = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: "https://3gyy9ytk9c.execute-api.us-east-1.amazonaws.com/",
   cache: new InMemoryCache(),
 });
 
