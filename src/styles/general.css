@@ -8,6 +8,15 @@
   color: #1D1F22;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  max-width: 1440px;
+}
+
 .hidden {
   display: none !important;
 }
