@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="readme-top"></a>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-## Available Scripts
+This is a simple e-commerce website. The user can navigate through the different categories and products and add/remove items from the cart.
 
-In the project directory, you can run:
+You can check it out [here](https://ecommerce-site99.netlify.app/).
 
-### `npm start`
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Built With
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* React
+* Redux
+* React-Router
+* Apollo Client
 
-### `npm test`
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- GETTING STARTED -->
+## Getting Started
 
-### `npm run build`
+To get a local copy up and running follow these simple example steps.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* npm
+* code editor such as Visual Studio Code
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
+1. Open your terminal and navigate to the directory where you want the project to be
 
-### `npm run eject`
+2. Clone the repo
+   ```sh
+    git clone https://github.com/dodoburner/ecommerce-site.git
+   ```
+3. Navigate to the project directory 
+    ```sh
+     cd ecommerce-site
+    ```
+4. Install NPM packages
+   ```sh
+    npm install
+   ```
+6. Start your server
+   ```sh
+    npm start
+   ```
+    
+To view and edit the code open the project folder in Visual Studio Code
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<!-- Features -->
+## Features
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [ ] The app is connected to a graphql backend server for all app data
+- [ ] The app has categories, products and cart pages handled by React-Router
+- [ ] The user can add items to the cart from the category or product pages
+- [ ] The user can edit the number of items in the cart from the minicart or cart page
+- [ ] The user can navigate the product gallery in the product or cart pages
+- [ ] Out of Stock items can't be added to cart
+- [ ] Users data (cart items, currency) is saved by using LocalStorage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<!-- CONTACT -->
+## Contact
 
-## Learn More
+- GitHub: [@dodoburner](https://github.com/dodoburner/)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/dorian-urem)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
 
-### Code Splitting
+* Thank you to Scandiweb for providing me with the [API](https://github.com/scandiweb/junior-react-endpoint) and [Figma](https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Frontend-Test-Designs-(Public)?node-id=0-1&t=wheeFkltpCq2DbKL-0) for this project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
