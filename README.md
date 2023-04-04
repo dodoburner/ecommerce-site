@@ -11,7 +11,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a simple e-commerce website. The user can navigate through the different categories and products and add/remove items from the cart.
+This is a simple e-commerce website built with React & Redux. The app data is fetched from a GraphQL API. The user can navigate through the different categories and products and add/remove items from the cart.
 
 You can check it out [here](https://ecommerce-site99.netlify.app/).
 
