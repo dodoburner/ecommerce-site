@@ -11,7 +11,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a simple e-commerce website based on a [Figma design](https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Frontend-Test-Designs-(Public)?node-id=0-1&t=wheeFkltpCq2DbKL-0) and a graphhQL[API](https://github.com/scandiweb/junior-react-endpoint), built with React & Redux. The user can navigate through the different categories and products, add/remove items from the cart, and see the prices for different currencies.
+This is a simple e-commerce website based on a [Figma design](https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Frontend-Test-Designs-(Public)?node-id=0-1&t=wheeFkltpCq2DbKL-0) and a graphhQL [API](https://github.com/scandiweb/junior-react-endpoint), built with React & Redux. The user can navigate through the different categories and products, add/remove items from the cart, and see the prices for different currencies.
 
 You can check it out [here](https://ecommerce-site99.netlify.app/).
 
